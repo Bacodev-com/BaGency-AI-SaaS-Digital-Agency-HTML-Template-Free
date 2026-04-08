@@ -1,0 +1,1388 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaGency – Studio | AI Automation Agency</title>
+    <!--
+        Page: Homepage Animated/Studio (H3)
+        Purpose: Dynamic, animation-rich homepage with canvas particles, typing effect, scroll progress bar, and magnetic buttons
+        Sections: Navbar, Hero (particles + typing animation), Logo Strip (marquee), Services, Stats Banner, Case Studies, Process, Testimonial, CTA, FAQ, Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: renderServices(), renderCaseStudiesFull(), renderProcess(), renderFAQ(), initScrollReveal(), initCounters(), heroParticles canvas, typing animation, scroll-progress bar, magnetic button effect, h3-reveal & stagger-children animations
+    -->
+    <meta name="description" content="BaGency Studio — We design intelligent systems that accelerate growth. AI automation agency with 500+ clients worldwide.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Shared Tailwind Config -->
+    <script src="js/tailwind-config.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Home3 Enhanced Animation Styles -->
+    <style>
+        /* === HERO CANVAS BACKGROUND === */
+        .hero-studio {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* === ANIMATED GRADIENT ORBS === */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .dark .orb {
+            opacity: 0.08;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #22c55e 0%, transparent 70%);
+            top: -10%;
+            right: -5%;
+            animation: orbDrift1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            bottom: -10%;
+            left: -5%;
+            animation: orbDrift2 25s ease-in-out infinite;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+            top: 40%;
+            left: 50%;
+            animation: orbDrift3 18s ease-in-out infinite;
+        }
+
+        @keyframes orbDrift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-40px, 30px) scale(1.1); }
+            50% { transform: translate(-20px, -20px) scale(0.95); }
+            75% { transform: translate(30px, -10px) scale(1.05); }
+        }
+
+        @keyframes orbDrift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -40px) scale(1.05); }
+            50% { transform: translate(-15px, 20px) scale(1.1); }
+            75% { transform: translate(-30px, -15px) scale(0.95); }
+        }
+
+        @keyframes orbDrift3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -30px) scale(1.08); }
+            66% { transform: translate(-30px, 40px) scale(0.92); }
+        }
+
+        /* === GEOMETRIC SHAPES (Enhanced) === */
+        .geo-shape {
+            position: absolute;
+            border-radius: 24px;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .dark .geo-shape {
+            opacity: 0;
+        }
+
+        .geo-shape-1 {
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            right: 5%;
+            top: 25%;
+            transform: rotate(-6deg);
+        }
+
+        .geo-shape-2 {
+            width: 250px;
+            height: 180px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            right: 15%;
+            top: 40%;
+            transform: rotate(4deg);
+        }
+
+        .geo-shape-3 {
+            width: 200px;
+            height: 140px;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            right: 8%;
+            top: 55%;
+            transform: rotate(-2deg);
+        }
+
+        /* Geo shapes animate in on load + float */
+        .geo-shape.animate-in {
+            animation: geoEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .geo-shape-1.animate-in {
+            animation: geoEnter1 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards,
+                       geoFloat1 8s ease-in-out 1.5s infinite;
+        }
+
+        .geo-shape-2.animate-in {
+            animation: geoEnter2 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards,
+                       geoFloat2 10s ease-in-out 1.8s infinite;
+        }
+
+        .geo-shape-3.animate-in {
+            animation: geoEnter3 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards,
+                       geoFloat3 12s ease-in-out 2.1s infinite;
+        }
+
+        @keyframes geoEnter1 {
+            from { opacity: 0; transform: rotate(-6deg) translateX(80px); }
+            to { opacity: 0.15; transform: rotate(-6deg) translateX(0); }
+        }
+
+        .dark .geo-shape-1.animate-in { animation-name: geoEnter1Dark; }
+        @keyframes geoEnter1Dark {
+            from { opacity: 0; transform: rotate(-6deg) translateX(80px); }
+            to { opacity: 0.08; transform: rotate(-6deg) translateX(0); }
+        }
+
+        @keyframes geoEnter2 {
+            from { opacity: 0; transform: rotate(4deg) translateX(60px); }
+            to { opacity: 0.15; transform: rotate(4deg) translateX(0); }
+        }
+
+        .dark .geo-shape-2.animate-in { animation-name: geoEnter2Dark; }
+        @keyframes geoEnter2Dark {
+            from { opacity: 0; transform: rotate(4deg) translateX(60px); }
+            to { opacity: 0.08; transform: rotate(4deg) translateX(0); }
+        }
+
+        @keyframes geoEnter3 {
+            from { opacity: 0; transform: rotate(-2deg) translateX(40px); }
+            to { opacity: 0.15; transform: rotate(-2deg) translateX(0); }
+        }
+
+        .dark .geo-shape-3.animate-in { animation-name: geoEnter3Dark; }
+        @keyframes geoEnter3Dark {
+            from { opacity: 0; transform: rotate(-2deg) translateX(40px); }
+            to { opacity: 0.08; transform: rotate(-2deg) translateX(0); }
+        }
+
+        @keyframes geoFloat1 {
+            0%, 100% { transform: rotate(-6deg) translate(0, 0); }
+            50% { transform: rotate(-4deg) translate(-10px, -15px); }
+        }
+
+        @keyframes geoFloat2 {
+            0%, 100% { transform: rotate(4deg) translate(0, 0); }
+            50% { transform: rotate(6deg) translate(10px, -10px); }
+        }
+
+        @keyframes geoFloat3 {
+            0%, 100% { transform: rotate(-2deg) translate(0, 0); }
+            50% { transform: rotate(0deg) translate(-5px, 10px); }
+        }
+
+        /* === TYPING ANIMATION === */
+        .typing-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .typing-text {
+            display: inline;
+            background: linear-gradient(135deg, #22c55e 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 0.85em;
+            background: #22c55e;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: cursorBlink 1s step-end infinite;
+            border-radius: 2px;
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* === HERO ENTRANCE ANIMATION === */
+        .hero-element {
+            opacity: 0;
+            transform: translateY(30px);
+            will-change: transform, opacity;
+        }
+
+        .hero-element.visible {
+            animation: heroEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-element.visible.delay-1 { animation-delay: 0.1s; }
+        .hero-element.visible.delay-2 { animation-delay: 0.25s; }
+        .hero-element.visible.delay-3 { animation-delay: 0.4s; }
+        .hero-element.visible.delay-4 { animation-delay: 0.55s; }
+        .hero-element.visible.delay-5 { animation-delay: 0.7s; }
+
+        @keyframes heroEnter {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === SECTION NUMBER === */
+        .section-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #22c55e;
+        }
+
+        /* === SERVICE LIST CARD (Enhanced Hover) === */
+        .service-list-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-list-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.06) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .service-list-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-list-card:hover {
+            border-left-color: #22c55e;
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.08);
+        }
+
+        .dark .service-list-card:hover {
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.04);
+        }
+
+        .service-list-card .service-icon-wrap {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-list-card:hover .service-icon-wrap {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-list-card .service-arrow {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-8px);
+        }
+
+        .service-list-card:hover .service-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* === H3 REVEAL (Enhanced) === */
+        .h3-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .h3-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === STAGGER CHILDREN === */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-children.revealed > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.revealed > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children.revealed > *:nth-child(3) { transition-delay: 0.2s; }
+        .stagger-children.revealed > *:nth-child(4) { transition-delay: 0.3s; }
+        .stagger-children.revealed > *:nth-child(5) { transition-delay: 0.4s; }
+        .stagger-children.revealed > *:nth-child(6) { transition-delay: 0.5s; }
+
+        .stagger-children.revealed > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === STATS COUNTER CARD (Enhanced) === */
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #8b5cf6);
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stat-card.revealed::after {
+            width: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* === LOGO MARQUEE === */
+        .marquee-track {
+            display: flex;
+            animation: marqueeScroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* === PROCESS TIMELINE (Enhanced) === */
+        .process-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #22c55e 0%, rgba(34, 197, 94, 0.05) 100%);
+            transform: translateX(-50%);
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .process-line.animate-in {
+            transform: scaleY(1);
+        }
+
+        .process-step-icon {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .process-step-card:hover .process-step-icon {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+        }
+
+        /* === TESTIMONIAL SPOTLIGHT (Enhanced) === */
+        .testimonial-spotlight {
+            position: relative;
+        }
+
+        .testimonial-spotlight::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+            border-radius: 1.5rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .testimonial-spotlight:hover::before {
+            opacity: 1;
+        }
+
+        /* === CTA SECTION (Enhanced) === */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section .cta-glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .cta-section .cta-glow-orb-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.15);
+            top: -50%;
+            right: 10%;
+            animation: ctaOrbFloat 6s ease-in-out infinite;
+        }
+
+        .cta-section .cta-glow-orb-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -30%;
+            left: 15%;
+            animation: ctaOrbFloat 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes ctaOrbFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        /* === MAGNETIC BUTTON EFFECT === */
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* === HORIZONTAL SCROLL LINE === */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #8b5cf6, #06b6d4);
+            z-index: 100;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s linear;
+        }
+
+        /* === SMOOTH PARALLAX LAYER === */
+        .parallax-layer {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* === GRADIENT BORDER ANIMATION === */
+        .gradient-border {
+            position: relative;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, #22c55e, #8b5cf6, #06b6d4, #22c55e);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease-in-out infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* === FAQ ENHANCED === */
+        .faq-item-enhanced {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-item-enhanced:hover {
+            transform: translateX(4px);
+        }
+
+        /* === ACCESSIBILITY === */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .marquee-track { animation: none !important; }
+        }
+
+        /* === MOBILE TWEAKS === */
+        @media (max-width: 768px) {
+            .orb-1 { width: 250px; height: 250px; }
+            .orb-2 { width: 200px; height: 200px; }
+            .orb-3 { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                        <span class="text-white font-display font-bold text-xl">B</span>
+                    </div>
+                    <span class="font-display font-bold text-2xl">BaGency</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="nav-dropdown">
+                        <span class="nav-link nav-dropdown-toggle active text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                        <div class="nav-dropdown-menu">
+                            <a href="index.html">
+                                <span class="dropdown-icon bg-gradient-to-br from-primary-500 to-primary-600 text-white">H1</span>
+                                <span class="dropdown-label">Classic<small>The original homepage</small></span>
+                            </a>
+                            <a href="home2.html">
+                                <span class="dropdown-icon bg-gradient-to-br from-cyan-500 to-cyan-600 text-white">H2</span>
+                                <span class="dropdown-label">Premium<small>Bento grid &amp; marquee</small></span>
+                            </a>
+                            <a href="home3.html" class="active">
+                                <span class="dropdown-icon bg-gradient-to-br from-violet-500 to-violet-600 text-white">H3</span>
+                                <span class="dropdown-label">Animated<small>Dynamic &amp; interactive</small></span>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                    <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                    <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                    <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                    <a href="blog.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                    <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+                    <a href="documentation.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Docs</a>
+                </div>
+                
+                <!-- Right Side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark/Light Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+                    </button>
+                    
+                    <!-- Book a Call Button -->
+                    <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm magnetic-btn">
+                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                        Book a Call
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ========== MOBILE MENU ========== -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden">
+        <div class="p-6">
+            <button id="mobile-menu-close" class="absolute top-6 right-6">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="mt-12 space-y-6">
+                <div>
+                    <button class="mobile-home-toggle mobile-nav-link active block text-lg font-medium hover:text-primary-500 transition-colors" id="mobile-home-btn">
+                        Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="mobile-home-submenu" id="mobile-home-submenu">
+                        <a href="index.html"><span class="sub-icon bg-gradient-to-br from-primary-500 to-primary-600 text-white text-xs">H1</span> Classic</a>
+                        <a href="home2.html"><span class="sub-icon bg-gradient-to-br from-cyan-500 to-cyan-600 text-white text-xs">H2</span> Premium</a>
+                        <a href="home3.html" class="active"><span class="sub-icon bg-gradient-to-br from-violet-500 to-violet-600 text-white text-xs">H3</span> Animated</a>
+                    </div>
+                </div>
+                <a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a>
+                <a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a>
+                <a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a>
+                <a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a>
+                <a href="blog.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a>
+                <a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a>
+                <a href="documentation.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Docs</a>
+                <a href="contact.html" class="btn-primary inline-flex mt-4">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                    Book a Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero-studio relative flex items-center pt-20 overflow-hidden">
+        <!-- Particle Canvas -->
+        <canvas id="hero-particles"></canvas>
+
+        <!-- Animated Gradient Orbs -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3 hidden lg:block"></div>
+
+        <!-- Geometric Shapes -->
+        <div class="geo-shape geo-shape-1 hidden lg:block" id="geo1"></div>
+        <div class="geo-shape geo-shape-2 hidden lg:block" id="geo2"></div>
+        <div class="geo-shape geo-shape-3 hidden lg:block" id="geo3"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 w-full">
+            <div class="max-w-3xl">
+                <!-- Headline with Typing Animation -->
+                <h1 class="hero-element delay-1 font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-8">
+                    We design <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">intelligent systems</span><br class="hidden sm:block">
+                    <span class="typing-wrapper">
+                        <span class="typing-text" id="typing-text"></span><span class="typing-cursor" id="typing-cursor"></span>
+                    </span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="hero-element delay-2 text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl leading-relaxed">
+                    From intelligent chatbots to full-scale automation pipelines, we help ambitious companies eliminate manual work and unlock exponential, sustainable growth.
+                </p>
+
+                <!-- CTAs -->
+                <div class="hero-element delay-3 flex flex-col sm:flex-row gap-4 mb-16">
+                    <a href="contact.html" class="magnetic-btn btn-primary btn-glow inline-flex items-center justify-center text-lg px-8 py-4 cta-glow">
+                        <i data-lucide="rocket" class="w-5 h-5 mr-2"></i>
+                        Start Your Project
+                    </a>
+                    <a href="case-studies.html" class="magnetic-btn btn-secondary inline-flex items-center justify-center text-lg px-8 py-4">
+                        View Our Work
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Mini Stat Indicators -->
+                <div class="hero-element delay-4 stagger-children grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-10 border-t border-gray-200 dark:border-gray-800" id="hero-stats">
+                    <div class="stat-card py-2">
+                        <p class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">500<span class="text-primary-500">+</span></p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Clients</p>
+                    </div>
+                    <div class="stat-card py-2">
+                        <p class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">$12M<span class="text-primary-500">+</span></p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Revenue</p>
+                    </div>
+                    <div class="stat-card py-2">
+                        <p class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">340<span class="text-primary-500">%</span></p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Efficiency</p>
+                    </div>
+                    <div class="stat-card py-2">
+                        <p class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">98<span class="text-primary-500">%</span></p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Retention</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LOGO STRIP (Infinite Marquee) ========== -->
+    <section class="py-12 border-y border-gray-200 dark:border-gray-800 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+            <p class="text-center text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-medium">Trusted by forward-thinking companies</p>
+        </div>
+        <div class="relative">
+            <div class="marquee-track">
+                <!-- First set -->
+                <div class="flex items-center gap-12 px-6">
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">TechCorp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">ScaleUp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">GrowthLab</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">DataPro</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">NovaTech</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">FinServe</div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex items-center gap-12 px-6">
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">TechCorp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">ScaleUp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">GrowthLab</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">DataPro</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">NovaTech</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">FinServe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES SECTION ========== -->
+    <section id="services" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="h3-reveal mb-16">
+                <span class="section-number">01 — What We Do</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6">
+                    Services that drive<br class="hidden sm:block"> measurable results
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-3xl text-lg leading-relaxed">
+                    Comprehensive AI automation services designed to transform your business operations. Each solution is tailored to your unique needs and integrated seamlessly into your existing workflows.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 gap-6 stagger-children" id="services-grid">
+                <!-- Service Cards will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATS BANNER ========== -->
+    <section class="py-20 lg:py-28 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 relative overflow-hidden">
+        <!-- Animated gradient decorations -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500 rounded-full blur-3xl opacity-10" style="animation: orbDrift1 15s ease-in-out infinite;"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-500 rounded-full blur-3xl opacity-10" style="animation: orbDrift2 20s ease-in-out infinite;"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500 rounded-full blur-3xl opacity-5" style="animation: orbDrift3 12s ease-in-out infinite;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 stagger-children" id="stats-grid">
+                <div class="stat-card text-center py-4">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-2">
+                        <span class="counter" data-target="500">0</span><span class="text-primary-400">+</span>
+                    </div>
+                    <p class="text-gray-400 font-medium">Clients</p>
+                </div>
+                <div class="stat-card text-center py-4">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-2">
+                        $<span class="counter" data-target="12">0</span><span class="text-primary-400">M+</span>
+                    </div>
+                    <p class="text-gray-400 font-medium">Revenue</p>
+                </div>
+                <div class="stat-card text-center py-4">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-2">
+                        <span class="counter" data-target="340">0</span><span class="text-primary-400">%</span>
+                    </div>
+                    <p class="text-gray-400 font-medium">Efficiency</p>
+                </div>
+                <div class="stat-card text-center py-4">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-2">
+                        <span class="counter" data-target="98">0</span><span class="text-primary-400">%</span>
+                    </div>
+                    <p class="text-gray-400 font-medium">Retention</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CASE STUDIES SECTION ========== -->
+    <section id="case-studies" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="h3-reveal mb-16">
+                <span class="section-number">02 — Case Studies</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6">
+                    Real results from<br class="hidden sm:block"> real businesses
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-3xl text-lg leading-relaxed">
+                    See how companies across industries have transformed their operations with BaGency's AI automation solutions.
+                </p>
+            </div>
+
+            <!-- Case Studies Grid -->
+            <div class="grid md:grid-cols-2 gap-8 stagger-children" id="case-studies-grid">
+                <!-- Case Study Cards will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROCESS SECTION ========== -->
+    <section class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="h3-reveal mb-16">
+                <span class="section-number">03 — How We Work</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6">
+                    A proven process for<br class="hidden sm:block"> lasting impact
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-3xl text-lg leading-relaxed">
+                    Our four-step methodology takes you from discovery to deployment with minimal disruption and maximum results.
+                </p>
+            </div>
+
+            <!-- Process Timeline -->
+            <div class="relative" id="process-container">
+                <div class="process-line hidden md:block" id="process-line"></div>
+                
+                <div class="space-y-12" id="process-timeline">
+                    <!-- Timeline items will be rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIAL SECTION ========== -->
+    <section id="testimonials" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="h3-reveal mb-16">
+                <span class="section-number">04 — Client Stories</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6">
+                    What our clients<br class="hidden sm:block"> say about us
+                </h2>
+            </div>
+
+            <!-- Single Testimonial Spotlight -->
+            <div class="reveal max-w-4xl mx-auto">
+                <div class="testimonial-spotlight glass-card rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+                    <!-- Decorative quote mark -->
+                    <div class="absolute top-6 left-8 text-8xl sm:text-9xl font-display leading-none text-primary-500/10 select-none pointer-events-none">&ldquo;</div>
+                    
+                    <div class="relative z-10">
+                        <!-- Star rating -->
+                        <div class="flex items-center gap-1 mb-8">
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        </div>
+
+                        <!-- Quote text -->
+                        <blockquote class="font-display text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed text-gray-900 dark:text-white mb-10">
+                            BaGency transformed our entire lead pipeline. We went from 50 leads/month to over 500 — with zero additional headcount. The ROI has been absolutely phenomenal.
+                        </blockquote>
+
+                        <!-- Author -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg shadow-primary-500/20">
+                                SC
+                            </div>
+                            <div>
+                                <p class="font-semibold text-lg">Sarah Chen</p>
+                                <p class="text-gray-500 dark:text-gray-400">VP of Growth at TechCorp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal cta-section relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 via-primary-600 to-accent-600 p-8 lg:p-16 text-center text-white shadow-2xl">
+                <!-- Floating Glow Orbs -->
+                <div class="cta-glow-orb cta-glow-orb-1"></div>
+                <div class="cta-glow-orb cta-glow-orb-2"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                        Ready to transform your business?
+                    </h2>
+                    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+                        Join 500+ businesses that have transformed their operations with BaGency's AI automation solutions. Book your free strategy session today.
+                    </p>
+                    <a href="contact.html" class="magnetic-btn inline-flex items-center justify-center px-10 py-4 bg-white text-primary-600 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
+                        <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                        Get Your Free Strategy Session
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section id="faq" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="reveal inline-flex items-center px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+                    <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i>
+                    FAQ
+                </div>
+                <h2 class="reveal font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                    Frequently Asked <span class="text-primary-500">Questions</span>
+                </h2>
+                <p class="reveal text-gray-600 dark:text-gray-400 text-lg">
+                    Got questions? We've got answers.
+                </p>
+            </div>
+            
+            <!-- FAQ Items -->
+            <div id="faq-container" class="space-y-4 stagger-children">
+                <!-- FAQ Items will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <a href="index.html" class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                            <span class="text-white font-display font-bold text-xl">B</span>
+                        </div>
+                        <span class="font-display font-bold text-2xl">BaGency</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">
+                        Transform your business with cutting-edge AI automation solutions. Save time, reduce costs, and scale efficiently.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li>
+                        <li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-primary-400"></i>
+                            <a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-primary-400"></i>
+                            <a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i>
+                            <span class="text-gray-400">123 AI Street, Tech City, TC 12345</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+    
+    <!-- ========== JAVASCRIPT ========== -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===== 1. TYPING ANIMATION =====
+        (function initTypingAnimation() {
+            const phrases = [
+                'that accelerates growth',
+                'that scale with you',
+                'that drive innovation',
+                'that eliminate complexity',
+                'that maximize efficiency'
+            ];
+
+            const typingEl = document.getElementById('typing-text');
+            const cursorEl = document.getElementById('typing-cursor');
+            if (!typingEl) return;
+
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 80;
+
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+
+                if (isDeleting) {
+                    typingEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                    typingSpeed = 40;
+                } else {
+                    typingEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                    typingSpeed = 80 + Math.random() * 40;
+                }
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    typingSpeed = 2500; // Pause at end of phrase
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    typingSpeed = 400; // Pause before next phrase
+                }
+
+                setTimeout(type, typingSpeed);
+            }
+
+            // Start typing after hero entrance animation completes
+            setTimeout(type, 700);
+        })();
+
+        // ===== 2. PARTICLE BACKGROUND =====
+        (function initParticles() {
+            const canvas = document.getElementById('hero-particles');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId;
+            let isDark = document.documentElement.classList.contains('dark');
+
+            function resize() {
+                canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+                canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            }
+
+            function createParticles() {
+                particles = [];
+                const count = window.innerWidth < 768 ? 30 : 60;
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.offsetWidth,
+                        y: Math.random() * canvas.offsetHeight,
+                        size: Math.random() * 2 + 0.5,
+                        speedX: (Math.random() - 0.5) * 0.4,
+                        speedY: (Math.random() - 0.5) * 0.4,
+                        opacity: Math.random() * 0.4 + 0.1,
+                        hue: Math.random() > 0.5 ? 142 : 260 // Green or purple hue
+                    });
+                }
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+                particles.forEach((p, i) => {
+                    // Update position
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
+                    // Wrap around edges
+                    if (p.x < 0) p.x = canvas.offsetWidth;
+                    if (p.x > canvas.offsetWidth) p.x = 0;
+                    if (p.y < 0) p.y = canvas.offsetHeight;
+                    if (p.y > canvas.offsetHeight) p.y = 0;
+
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = isDark
+                        ? `hsla(${p.hue}, 70%, 60%, ${p.opacity * 0.6})`
+                        : `hsla(${p.hue}, 60%, 40%, ${p.opacity * 0.5})`;
+                    ctx.fill();
+
+                    // Draw connections (only check nearby particles)
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            const lineOpacity = (1 - dist / 120) * 0.15;
+                            ctx.strokeStyle = isDark
+                                ? `hsla(142, 60%, 60%, ${lineOpacity})`
+                                : `hsla(142, 50%, 40%, ${lineOpacity * 0.7})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                animationId = requestAnimationFrame(drawParticles);
+            }
+
+            resize();
+            createParticles();
+            drawParticles();
+
+            // Update dark mode state
+            const observer = new MutationObserver(() => {
+                isDark = document.documentElement.classList.contains('dark');
+            });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                resize();
+                createParticles();
+                drawParticles();
+            });
+        })();
+
+        // ===== 3. HERO ENTRANCE ANIMATION =====
+        (function initHeroEntrance() {
+            const heroElements = document.querySelectorAll('.hero-element');
+            // Trigger after a brief delay for page load
+            setTimeout(() => {
+                heroElements.forEach(el => el.classList.add('visible'));
+            }, 100);
+
+            // Geometric shapes entrance
+            const geoShapes = document.querySelectorAll('.geo-shape');
+            setTimeout(() => {
+                geoShapes.forEach(shape => shape.classList.add('animate-in'));
+            }, 200);
+        })();
+
+        // ===== 4. HERO STATS STAGGER =====
+        (function initHeroStats() {
+            const heroStats = document.getElementById('hero-stats');
+            if (!heroStats) return;
+            setTimeout(() => {
+                heroStats.classList.add('revealed');
+            }, 1200);
+        })();
+
+        // ===== 5. SCROLL PROGRESS BAR =====
+        (function initScrollProgress() {
+            const progressBar = document.getElementById('scroll-progress');
+            if (!progressBar) return;
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            }, { passive: true });
+        })();
+
+        // ===== 6. ENHANCED H3-REVEAL OBSERVER =====
+        const h3Reveals = document.querySelectorAll('.h3-reveal');
+        const h3Observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+        h3Reveals.forEach(el => h3Observer.observe(el));
+
+        // ===== 7. STAGGER CHILDREN OBSERVER =====
+        const staggerContainers = document.querySelectorAll('.stagger-children:not(#hero-stats)');
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+        staggerContainers.forEach(el => staggerObserver.observe(el));
+
+        // ===== 8. PROCESS LINE ANIMATION =====
+        (function initProcessLine() {
+            const processLine = document.getElementById('process-line');
+            const processContainer = document.getElementById('process-container');
+            if (!processLine || !processContainer) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        processLine.classList.add('animate-in');
+                    }
+                });
+            }, { threshold: 0.2 });
+            observer.observe(processContainer);
+        })();
+
+        // ===== 9. STAT CARD BOTTOM LINE ANIMATION =====
+        const statCards = document.querySelectorAll('.stat-card');
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.3 });
+        statCards.forEach(el => statObserver.observe(el));
+
+        // ===== 10. MAGNETIC BUTTON EFFECT =====
+        (function initMagneticButtons() {
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
+        })();
+
+        // ===== 11. SMOOTH PARALLAX ON SCROLL =====
+        (function initParallax() {
+            const orbs = document.querySelectorAll('.orb');
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        const scrollY = window.scrollY;
+                        orbs.forEach((orb, i) => {
+                            const speed = 0.03 + (i * 0.015);
+                            orb.style.transform = `translateY(${scrollY * speed}px)`;
+                        });
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+
+        // ===== 12. ENHANCED SERVICE CARDS WITH ARROW =====
+        // Enhance service cards rendered by main.js with additional animation classes
+        const serviceGrid = document.getElementById('services-grid');
+        if (serviceGrid) {
+            const originalRenderServices = typeof renderServices === 'function' ? renderServices : null;
+            // Services are already rendered by main.js; add hover enhancements after render
+            const enhanceServices = () => {
+                const cards = serviceGrid.querySelectorAll('.card-service');
+                cards.forEach(card => {
+                    card.classList.add('service-list-card', 'gradient-border');
+                    // Add arrow indicator
+                    const link = card.querySelector('a') || card;
+                    const arrow = document.createElement('div');
+                    arrow.className = 'service-arrow absolute top-6 right-6 w-8 h-8 rounded-full bg-primary-500/10 flex items-center justify-center';
+                    arrow.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+                    card.style.position = 'relative';
+                    card.appendChild(arrow);
+
+                    // Wrap icon in service-icon-wrap
+                    const iconWrap = card.querySelector('[class*="bg-"][class*="rounded-xl"]');
+                    if (iconWrap) {
+                        iconWrap.classList.add('service-icon-wrap');
+                    }
+                });
+            };
+            // Wait for main.js to render
+            setTimeout(enhanceServices, 100);
+        }
+
+        // ===== 13. FAQ ENHANCED CLASS =====
+        const faqContainer = document.getElementById('faq-container');
+        if (faqContainer) {
+            const enhanceFAQ = () => {
+                const items = faqContainer.querySelectorAll('.faq-item');
+                items.forEach(item => {
+                    item.classList.add('faq-item-enhanced');
+                });
+            };
+            setTimeout(enhanceFAQ, 100);
+        }
+    });
+    </script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

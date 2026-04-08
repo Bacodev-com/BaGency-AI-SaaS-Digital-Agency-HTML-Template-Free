@@ -1,0 +1,1911 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation – BaGency AI Agency Template</title>
+    <meta name="description" content="Comprehensive documentation for the BaGency AI Automation Agency template. Setup, customization, deployment guides and more.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Shared Tailwind Config -->
+    <script src="js/tailwind-config.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Documentation-Specific Styles -->
+    <style>
+        /* ----- Layout ----- */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: calc(100vh - 72px);
+            overflow: hidden;
+        }
+
+        /* ----- Sidebar ----- */
+        .docs-sidebar {
+            position: sticky;
+            top: 72px;
+            height: calc(100vh - 72px);
+            overflow-y: auto;
+            align-self: start;
+            border-right: 1px solid rgba(0,0,0,.08);
+            background: rgba(255,255,255,.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 30;
+            transition: background .3s, border-color .3s;
+        }
+        .dark .docs-sidebar {
+            background: rgba(17,24,39,.6);
+            border-right-color: rgba(255,255,255,.08);
+        }
+
+        .docs-sidebar::-webkit-scrollbar { width: 4px; }
+        .docs-sidebar::-webkit-scrollbar-track { background: transparent; }
+        .docs-sidebar::-webkit-scrollbar-thumb { background: rgba(34,197,94,.25); border-radius: 4px; }
+
+        /* TOC link styles */
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .75rem .4rem 1.5rem;
+            font-size: .8125rem;
+            font-weight: 500;
+            color: #6b7280;
+            border-left: 2px solid transparent;
+            transition: all .2s;
+            text-decoration: none;
+        }
+        .dark .toc-link { color: #9ca3af; }
+        .toc-link:hover { color: #22c55e; background: rgba(34,197,94,.05); }
+        .toc-link.active {
+            color: #22c55e;
+            border-left-color: #22c55e;
+            background: rgba(34,197,94,.08);
+            font-weight: 600;
+        }
+        .dark .toc-link.active { color: #4ade80; border-left-color: #4ade80; }
+
+        .toc-section-title {
+            font-size: .6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #9ca3af;
+            padding: .75rem .75rem .25rem 1.5rem;
+        }
+        .dark .toc-section-title { color: #6b7280; }
+
+        /* ----- Main Content ----- */
+        .docs-content {
+            padding: 2.5rem 3rem 6rem;
+            max-width: 860px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            overflow-x: hidden;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        /* Force ALL children to allow shrinking in flex/grid contexts */
+        .docs-content > * {
+            min-width: 0;
+        }
+
+        /* ----- Typography ----- */
+        .docs-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+            scroll-margin-top: 96px;
+            overflow-wrap: break-word;
+        }
+        .dark .docs-content h2 { border-bottom-color: rgba(255,255,255,.06); }
+
+        .docs-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: .75rem;
+            scroll-margin-top: 96px;
+            overflow-wrap: break-word;
+        }
+
+        .docs-content h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: .5rem;
+            overflow-wrap: break-word;
+        }
+
+        .docs-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            overflow-wrap: break-word;
+        }
+        .dark .docs-content p { color: #d1d5db; }
+
+        .docs-content ul, .docs-content ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+        .docs-content li {
+            margin-bottom: .4rem;
+            line-height: 1.75;
+            color: #4b5563;
+            overflow-wrap: break-word;
+        }
+        .dark .docs-content li { color: #d1d5db; }
+
+        .docs-content a {
+            color: #22c55e;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .docs-content a:hover { color: #16a34a; }
+        /* Prevent docs link styles from overriding button classes */
+        .docs-content a.btn-primary,
+        .docs-content a.btn-secondary,
+        .docs-content a.btn-glow {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ----- Info / Warning / Tip Callouts ----- */
+        .callout {
+            border-radius: .75rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            gap: .75rem;
+            font-size: .875rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            overflow: hidden;
+        }
+        .callout-icon { flex-shrink: 0; margin-top: 2px; }
+        .callout > span:last-child {
+            min-width: 0;
+            flex: 1;
+        }
+        .callout-info {
+            background: rgba(34,197,94,.06);
+            border: 1px solid rgba(34,197,94,.15);
+            color: #166534;
+        }
+        .dark .callout-info { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.2); color: #86efac; }
+        .callout-warning {
+            background: rgba(245,158,11,.06);
+            border: 1px solid rgba(245,158,11,.15);
+            color: #92400e;
+        }
+        .dark .callout-warning { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.2); color: #fcd34d; }
+        .callout-tip {
+            background: rgba(139,92,246,.06);
+            border: 1px solid rgba(139,92,246,.15);
+            color: #5b21b6;
+        }
+        .dark .callout-tip { background: rgba(139,92,246,.1); border-color: rgba(139,92,246,.2); color: #c4b5fd; }
+
+        /* ----- Code Blocks ----- */
+        .code-block {
+            position: relative;
+            background: #111827;
+            border-radius: .75rem;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.06);
+        }
+        .dark .code-block { border-color: rgba(255,255,255,.08); }
+
+        .code-block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .5rem 1rem;
+            background: rgba(255,255,255,.04);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            gap: .5rem;
+            min-width: 0;
+        }
+        .code-block-lang {
+            font-size: .6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+        .code-block-copy {
+            font-size: .6875rem;
+            color: #6b7280;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            transition: color .2s;
+        }
+        .code-block-copy:hover { color: #d1d5db; }
+
+        .code-block pre {
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            margin: 0;
+        }
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: .8125rem;
+            line-height: 1.7;
+            color: #e5e7eb;
+        }
+
+        /* Syntax coloring (approximate) */
+        .code-block .cm { color: #6b7280; }          /* comment */
+        .code-block .kw { color: #c084fc; }          /* keyword */
+        .code-block .st { color: #86efac; }          /* string */
+        .code-block .fn { color: #60a5fa; }          /* function */
+        .code-block .nb { color: #f9a8d4; }          /* number / boolean */
+        .code-block .pr { color: #fbbf24; }          /* property */
+        .code-block .tg { color: #f87171; }          /* tag */
+        .code-block .at { color: #67e8f9; }          /* attribute */
+        .code-block .op { color: #9ca3af; }          /* operator */
+
+        /* Inline code */
+        .docs-content code:not(pre code) {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8125rem;
+            background: rgba(34,197,94,.08);
+            color: #16a34a;
+            padding: .15em .4em;
+            border-radius: .3rem;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .dark .docs-content code:not(pre code) {
+            background: rgba(34,197,94,.15);
+            color: #4ade80;
+        }
+
+        /* ----- File Tree ----- */
+        .file-tree {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8125rem;
+            line-height: 2;
+            color: #374151;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: pre;
+            max-width: 100%;
+        }
+        .dark .file-tree {
+            background: #111827;
+            border-color: rgba(255,255,255,.08);
+            color: #d1d5db;
+        }
+        .file-tree .ft-dir { color: #f59e0b; font-weight: 600; }
+        .file-tree .ft-file { color: #22c55e; }
+        .file-tree .ft-desc { color: #9ca3af; font-family: 'Inter', sans-serif; font-size: .75rem; margin-left: .5rem; }
+        .dark .file-tree .ft-desc { color: #6b7280; }
+
+        /* ----- Component Showcase Grid ----- */
+        .component-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .component-card {
+            border: 1px solid rgba(0,0,0,.06);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .dark .component-card { border-color: rgba(255,255,255,.06); }
+        .component-card-preview {
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #f9fafb;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        .dark .component-card-preview { background: rgba(17,24,39,.5); }
+        .component-card-label {
+            padding: .75rem 1.25rem;
+            border-top: 1px solid rgba(0,0,0,.06);
+            font-size: .8125rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #6b7280;
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        .dark .component-card-label { border-top-color: rgba(255,255,255,.06); color: #9ca3af; }
+
+        /* ----- Step Cards ----- */
+        .step-card {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(34,197,94,.12);
+            background: rgba(34,197,94,.03);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .step-card > div:last-child {
+            min-width: 0;
+            flex: 1;
+            overflow-wrap: break-word;
+        }
+        .dark .step-card { background: rgba(34,197,94,.05); border-color: rgba(34,197,94,.15); }
+        .step-num {
+            flex-shrink: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: .75rem;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: .875rem;
+        }
+
+        /* ----- Color Swatch Row ----- */
+        .color-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: .5rem;
+            padding: .35rem .75rem .35rem .35rem;
+            font-size: .75rem;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .dark .color-swatch { background: #1f2937; border-color: rgba(255,255,255,.08); }
+        .color-swatch-box {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: .375rem;
+            border: 1px solid rgba(0,0,0,.1);
+        }
+
+        /* ----- Mobile Sidebar Toggle ----- */
+        .docs-sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.4);
+            z-index: 35;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .docs-sidebar-overlay.active { opacity: 1; }
+
+        .docs-sidebar-close {
+            display: none;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 36;
+        }
+
+        @media (max-width: 1023px) {
+            .docs-layout { grid-template-columns: 1fr; }
+            .docs-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform .3s cubic-bezier(.16,1,.3,1);
+                z-index: 40;
+                padding-top: 1rem;
+            }
+            .docs-sidebar.open { transform: translateX(0); }
+            .docs-sidebar-overlay.active { display: block; }
+            .docs-sidebar-close { display: flex; }
+            .docs-content { padding: 1.5rem 1rem 4rem; }
+        }
+
+        /* Small mobile adjustments */
+        @media (max-width: 639px) {
+            .docs-content h2 { font-size: 1.35rem; margin-top: 2.5rem; }
+            .docs-content h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+            .docs-content h4 { font-size: .9375rem; margin-top: 1.25rem; }
+            .component-card-preview { padding: 1rem; gap: .75rem; }
+            .step-card { padding: 1rem; gap: .75rem; }
+            .step-num { width: 2rem; height: 2rem; font-size: .75rem; border-radius: .5rem; }
+            .file-tree { font-size: .6875rem; padding: 1rem; }
+            .callout { flex-direction: column; gap: .5rem; padding: .875rem 1rem; }
+            .credit-item { flex-direction: column; align-items: flex-start; gap: .5rem; }
+            .credit-icon { width: 2.25rem; height: 2.25rem; }
+            .code-block-lang { font-size: .625rem; }
+            .code-block pre { padding: .75rem 1rem; }
+            .code-block code { font-size: .75rem; }
+            .docs-content code:not(pre code) { font-size: .75rem; }
+            .color-swatch { font-size: .6875rem; padding: .25rem .5rem .25rem .25rem; }
+            .color-swatch-box { width: 1.25rem; height: 1.25rem; }
+            .docs-table th, .docs-table td { padding: .5rem .625rem; font-size: .8125rem; }
+            .component-card-label { font-size: .75rem; padding: .625rem 1rem; }
+            .glass-card { border-radius: .75rem !important; }
+        }
+
+        /* ----- Page Badge ----- */
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .25rem .75rem;
+            border-radius: 999px;
+            font-size: .75rem;
+            font-weight: 600;
+            background: rgba(34,197,94,.1);
+            color: #22c55e;
+        }
+        .dark .version-badge { background: rgba(34,197,94,.15); color: #4ade80; }
+
+        /* ----- Table ----- */
+        .docs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.25rem;
+            font-size: .875rem;
+            display: table;
+        }
+        /* Responsive table wrapper */
+        .docs-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1.25rem;
+            border-radius: .75rem;
+            border: 1px solid rgba(0,0,0,.06);
+        }
+        .dark .docs-table-wrap { border-color: rgba(255,255,255,.06); }
+        .docs-table-wrap .docs-table { margin-bottom: 0; border: none; }
+        .docs-table th {
+            text-align: left;
+            padding: .625rem 1rem;
+            font-weight: 600;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: #6b7280;
+            background: #f9fafb;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .dark .docs-table th { background: #111827; color: #9ca3af; border-bottom-color: rgba(255,255,255,.1); }
+        .docs-table td {
+            padding: .625rem 1rem;
+            border-bottom: 1px solid rgba(0,0,0,.05);
+            color: #4b5563;
+        }
+        .dark .docs-table td { border-bottom-color: rgba(255,255,255,.05); color: #d1d5db; }
+        .docs-table tr:last-child td { border-bottom: none; }
+
+        /* ----- Changelog version tag ----- */
+        .changelog-tag {
+            display: inline-block;
+            padding: .125rem .5rem;
+            border-radius: .25rem;
+            font-size: .6875rem;
+            font-weight: 700;
+        }
+        .changelog-new { background: rgba(34,197,94,.1); color: #16a34a; }
+        .changelog-fix { background: rgba(59,130,246,.1); color: #2563eb; }
+        .changelog-update { background: rgba(245,158,11,.1); color: #d97706; }
+        .dark .changelog-new { color: #4ade80; }
+        .dark .changelog-fix { color: #60a5fa; }
+        .dark .changelog-update { color: #fbbf24; }
+
+        /* Animate float for hero graphic */
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* Credit card */
+        .credit-item {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            padding: .75rem 1rem;
+            border-radius: .75rem;
+            border: 1px solid rgba(0,0,0,.06);
+            margin-bottom: .5rem;
+            transition: border-color .2s;
+            overflow-wrap: break-word;
+            overflow: hidden;
+        }
+        .dark .credit-item { border-color: rgba(255,255,255,.06); }
+        .credit-item:hover { border-color: rgba(34,197,94,.3); }
+        .credit-item > div:last-child {
+            min-width: 0;
+            flex: 1;
+        }
+        .credit-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: .5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+
+    <!-- ========== NAVBAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-[72px]">
+                <!-- Logo + Back -->
+                <div class="flex items-center space-x-4">
+                    <button id="docs-sidebar-toggle" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center space-x-2 group">
+                        <div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                            <span class="text-white font-display font-bold text-lg">B</span>
+                        </div>
+                        <span class="font-display font-bold text-xl hidden sm:inline">BaGency</span>
+                    </a>
+                    <span class="hidden sm:inline-flex items-center text-sm text-gray-400 dark:text-gray-500">
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <span class="ml-1 font-medium text-gray-600 dark:text-gray-300">Documentation</span>
+                    </span>
+                </div>
+
+                <!-- Right Side -->
+                <div class="flex items-center space-x-3">
+                    <span class="version-badge hidden sm:inline-flex">
+                        <i data-lucide="tag" class="w-3 h-3"></i>
+                        v1.0.0
+                    </span>
+                    <a href="index.html" class="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Back to Site
+                    </a>
+                    <a href="index.html" class="sm:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                    <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="docs-sidebar-overlay" class="docs-sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- ========== DOCS LAYOUT ========== -->
+    <div class="docs-layout pt-[72px]">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside id="docs-sidebar" class="docs-sidebar">
+            <button class="docs-sidebar-close p-2 rounded-xl bg-gray-100 dark:bg-gray-800" onclick="closeSidebar()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="py-4">
+                <!-- Getting Started -->
+                <p class="toc-section-title">Getting Started</p>
+                <a href="#introduction" class="toc-link active" data-section="introduction">
+                    <i data-lucide="book-open" class="w-4 h-4 flex-shrink-0"></i> Introduction
+                </a>
+                <a href="#quick-start" class="toc-link" data-section="quick-start">
+                    <i data-lucide="rocket" class="w-4 h-4 flex-shrink-0"></i> Quick Start
+                </a>
+                <a href="#file-structure" class="toc-link" data-section="file-structure">
+                    <i data-lucide="folder-tree" class="w-4 h-4 flex-shrink-0"></i> File Structure
+                </a>
+
+                <!-- Customization -->
+                <p class="toc-section-title mt-4">Customization</p>
+                <a href="#customization-guide" class="toc-link" data-section="customization-guide">
+                    <i data-lucide="palette" class="w-4 h-4 flex-shrink-0"></i> Customization Guide
+                </a>
+                <a href="#page-guide" class="toc-link" data-section="page-guide">
+                    <i data-lucide="layout" class="w-4 h-4 flex-shrink-0"></i> Page Guide
+                </a>
+                <a href="#components" class="toc-link" data-section="components">
+                    <i data-lucide="blocks" class="w-4 h-4 flex-shrink-0"></i> Components
+                </a>
+
+                <!-- Features -->
+                <p class="toc-section-title mt-4">Features</p>
+                <a href="#dark-mode" class="toc-link" data-section="dark-mode">
+                    <i data-lucide="moon" class="w-4 h-4 flex-shrink-0"></i> Dark Mode
+                </a>
+                <a href="#animations" class="toc-link" data-section="animations">
+                    <i data-lucide="sparkles" class="w-4 h-4 flex-shrink-0"></i> Animations
+                </a>
+
+                <!-- Deployment -->
+                <p class="toc-section-title mt-4">Deployment</p>
+                <a href="#deployment" class="toc-link" data-section="deployment">
+                    <i data-lucide="cloud" class="w-4 h-4 flex-shrink-0"></i> Deployment
+                </a>
+
+                <!-- Extras -->
+                <p class="toc-section-title mt-4">Extras</p>
+                <a href="#changelog" class="toc-link" data-section="changelog">
+                    <i data-lucide="git-commit" class="w-4 h-4 flex-shrink-0"></i> Changelog
+                </a>
+                <a href="#support-credits" class="toc-link" data-section="support-credits">
+                    <i data-lucide="life-buoy" class="w-4 h-4 flex-shrink-0"></i> Support & Credits
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="docs-content">
+
+            <!-- Hero Header -->
+            <div class="mb-10">
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <span class="version-badge"><i data-lucide="tag" class="w-3 h-3"></i> v1.0.0</span>
+                    <span class="px-3 py-1 rounded-full bg-accent-500/10 text-accent-500 text-xs font-semibold">AI Automation Agency</span>
+                </div>
+                <h1 class="font-display text-3xl sm:text-4xl font-bold mb-3" style="margin-top:0;border:none;padding:0;">
+                    BaGency Documentation
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl" style="margin-bottom:0;">
+                    Everything you need to set up, customize, and deploy your AI Automation Agency template. Built with Tailwind CSS, Lucide Icons, and vanilla JavaScript.
+                </p>
+            </div>
+
+            <!-- ============================================
+                 SECTION 1 — INTRODUCTION
+                 ============================================ -->
+            <h2 id="introduction">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-6 h-6 text-primary-500"></i>
+                    Introduction
+                </span>
+            </h2>
+
+            <p>
+                <strong>BaGency</strong> is a premium, multi-page HTML template designed for AI automation agencies, SaaS startups, and digital service businesses. It features a modern glassmorphism design system, three homepage variants, fully working interactive components, and class-based dark mode — all without any build tools or frameworks.
+            </p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>3 Homepage Variants</strong> — Classic, Premium (Bento Grid), and Animated styles</li>
+                <li><strong>16 Pre-built Pages</strong> — About, Services, Case Studies, Pricing, Blog, FAQ, Contact, and legal pages</li>
+                <li><strong>Glassmorphism Design</strong> — Modern frosted-glass cards and overlays</li>
+                <li><strong>Dark Mode</strong> — Class-based toggle with <code>localStorage</code> persistence</li>
+                <li><strong>Fully Responsive</strong> — Mobile-first, works on all screen sizes</li>
+                <li><strong>Interactive Components</strong> — ROI calculator, chatbot demo, testimonial slider, FAQ accordion, billing toggle</li>
+                <li><strong>Centralized Data</strong> — All content lives in <code>js/data.js</code> for easy editing</li>
+                <li><strong>Scroll Reveal Animations</strong> — IntersectionObserver-powered entrance effects</li>
+                <li><strong>No Build Tools</strong> — Pure HTML, CSS, and JavaScript — just open in a browser</li>
+            </ul>
+
+            <h3>Tech Stack</h3>
+            <div class="docs-table-wrap"><table class="docs-table">
+                <thead>
+                    <tr><th>Technology</th><th>Version / Source</th><th>Purpose</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tailwind CSS</td><td>CDN (latest)</td><td>Utility-first styling</td></tr>
+                    <tr><td>Lucide Icons</td><td>CDN (latest)</td><td>Open-source SVG icon set</td></tr>
+                    <tr><td>Google Fonts</td><td>Inter + Space Grotesk</td><td>Typography</td></tr>
+                    <tr><td>JavaScript</td><td>ES6+ (vanilla)</td><td>Interactivity & rendering</td></tr>
+                </tbody>
+            </table></div>
+
+            <h3>Browser Support</h3>
+            <p>BaGency supports all modern, evergreen browsers:</p>
+            <ul>
+                <li>Google Chrome (latest)</li>
+                <li>Mozilla Firefox (latest)</li>
+                <li>Apple Safari (latest)</li>
+                <li>Microsoft Edge (latest)</li>
+                <li>Opera (latest)</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon"><i data-lucide="alert-triangle" class="w-5 h-5"></i></span>
+                <span>Internet Explorer is <strong>not</strong> supported. The template uses modern CSS features such as <code>backdrop-filter</code>, CSS Grid, and <code>IntersectionObserver</code>.</span>
+            </div>
+
+
+            <!-- ============================================
+                 SECTION 2 — QUICK START
+                 ============================================ -->
+            <h2 id="quick-start">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="rocket" class="w-6 h-6 text-primary-500"></i>
+                    Quick Start
+                </span>
+            </h2>
+
+            <p>Get BaGency up and running in three simple steps. No Node.js, npm, or build tools required.</p>
+
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <div>
+                    <h4>Download & Extract</h4>
+                    <p style="margin-bottom:0;">Download the template ZIP file and extract it to a folder on your computer. You'll see the <code>bagency/</code> directory containing all files.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <div>
+                    <h4>Upload or Open Locally</h4>
+                    <p style="margin-bottom:.5rem;">You have two options:</p>
+                    <ul style="margin-bottom:0;">
+                        <li><strong>Local preview:</strong> Open <code>index.html</code> directly in your browser, or use a local server like VS Code Live Server.</li>
+                        <li><strong>Upload to server:</strong> Upload the entire <code>bagency/</code> folder to your web server via FTP, SFTP, or your hosting panel's file manager.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <div>
+                    <h4>Open in Browser</h4>
+                    <p style="margin-bottom:0;">Navigate to <code>https://yourdomain.com/bagency/</code> (or your local path) and you'll see the homepage. That's it — you're ready to customize!</p>
+                </div>
+            </div>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon"><i data-lucide="lightbulb" class="w-5 h-5"></i></span>
+                <span>For the best development experience, use <strong>VS Code</strong> with the <strong>Live Server</strong> extension. Right-click <code>index.html</code> and select "Open with Live Server" to get hot-reloading on file changes.</span>
+            </div>
+
+
+            <!-- ============================================
+                 SECTION 3 — FILE STRUCTURE
+                 ============================================ -->
+            <h2 id="file-structure">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="folder-tree" class="w-6 h-6 text-primary-500"></i>
+                    File Structure
+                </span>
+            </h2>
+
+            <p>Here is the complete directory layout with explanations for each file:</p>
+
+            <div class="file-tree">
+<span class="ft-dir">bagency/</span>                        <span class="ft-desc">Root template folder</span>
+├── <span class="ft-file">index.html</span>                 <span class="ft-desc">Homepage — Classic variant</span>
+├── <span class="ft-file">home2.html</span>                 <span class="ft-desc">Homepage — Premium (Bento Grid) variant</span>
+├── <span class="ft-file">home3.html</span>                 <span class="ft-desc">Homepage — Animated variant</span>
+├── <span class="ft-file">about.html</span>                 <span class="ft-desc">About Us page</span>
+├── <span class="ft-file">services.html</span>              <span class="ft-desc">Services listing + detail modals</span>
+├── <span class="ft-file">case-studies.html</span>          <span class="ft-desc">Client case studies with before/after data</span>
+├── <span class="ft-file">pricing.html</span>               <span class="ft-desc">Pricing plans with monthly/yearly toggle</span>
+├── <span class="ft-file">blog.html</span>                  <span class="ft-desc">Blog listing with featured post grid</span>
+├── <span class="ft-file">blog-single.html</span>           <span class="ft-desc">Individual blog post template</span>
+├── <span class="ft-file">faq.html</span>                   <span class="ft-desc">FAQ with categorized accordion</span>
+├── <span class="ft-file">contact.html</span>               <span class="ft-desc">Contact page with booking form</span>
+├── <span class="ft-file">privacy-policy.html</span>        <span class="ft-desc">Privacy Policy legal page</span>
+├── <span class="ft-file">terms-of-service.html</span>      <span class="ft-desc">Terms of Service legal page</span>
+├── <span class="ft-file">cookie-policy.html</span>         <span class="ft-desc">Cookie Policy legal page</span>
+├── <span class="ft-file">documentation.html</span>         <span class="ft-desc">This file — Template documentation</span>
+│
+├── <span class="ft-dir">css/</span>
+│   └── <span class="ft-file">style.css</span>              <span class="ft-desc">Shared styles (~1000 lines) — glassmorphism, buttons, cards, animations, FAQ, slider, etc.</span>
+│
+└── <span class="ft-dir">js/</span>
+    ├── <span class="ft-file">tailwind-config.js</span>     <span class="ft-desc">Custom Tailwind config — colors (primary/accent), fonts, animations, keyframes</span>
+    ├── <span class="ft-file">data.js</span>                <span class="ft-desc">Centralized content data — services, pricing, testimonials, FAQ, blog posts, team</span>
+    └── <span class="ft-file">main.js</span>                <span class="ft-desc">All render functions, scroll reveal, theme toggle, navbar, forms, calculator, chatbot</span>
+            </div>
+
+            <h3>How It Works</h3>
+            <p>BaGency uses a <strong>data-driven architecture</strong>. Content such as services, pricing plans, testimonials, and FAQ items are defined as JavaScript objects in <code>js/data.js</code>. The <code>js/main.js</code> file contains render functions that inject this data into the HTML on page load. This means you can change most content by editing <code>data.js</code> without touching HTML structure.</p>
+
+            <p>Static pages (About, legal pages, blog single) contain their content directly in the HTML for more flexible layouts.</p>
+
+
+            <!-- ============================================
+                 SECTION 4 — CUSTOMIZATION GUIDE
+                 ============================================ -->
+            <h2 id="customization-guide">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="palette" class="w-6 h-6 text-primary-500"></i>
+                    Customization Guide
+                </span>
+            </h2>
+
+            <p>This section covers how to customize the template's visual identity and content.</p>
+
+            <!-- Colors -->
+            <h3 id="customization-colors">Colors</h3>
+            <p>All colors are defined in <code>js/tailwind-config.js</code>. The template uses two color scales:</p>
+
+            <h4>Primary (Green)</h4>
+            <div class="color-row">
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#f0fdf4"></div> 50 #f0fdf4</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#dcfce7"></div> 100 #dcfce7</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#bbf7d0"></div> 200 #bbf7d0</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#86efac"></div> 300 #86efac</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#4ade80"></div> 400 #4ade80</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#22c55e"></div> 500 #22c55e</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#16a34a"></div> 600 #16a34a</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#15803d"></div> 700 #15803d</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#166534"></div> 800 #166534</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#14532d"></div> 900 #14532d</div>
+            </div>
+
+            <h4>Accent (Purple)</h4>
+            <div class="color-row">
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#a78bfa"></div> 400 #a78bfa</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#8b5cf6"></div> 500 #8b5cf6</div>
+                <div class="color-swatch"><div class="color-swatch-box" style="background:#7c3aed"></div> 600 #7c3aed</div>
+            </div>
+
+            <p>To change colors, edit <code>js/tailwind-config.js</code>:</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">JavaScript — js/tailwind-config.js</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">// Change primary from green to blue, for example:</span>
+<span class="pr">primary</span>: {
+    <span class="at">50</span>:  <span class="st">'#eff6ff'</span>,
+    <span class="at">100</span>: <span class="st">'#dbeafe'</span>,
+    <span class="at">200</span>: <span class="st">'#bfdbfe'</span>,
+    <span class="at">300</span>: <span class="st">'#93c5fd'</span>,
+    <span class="at">400</span>: <span class="st">'#60a5fa'</span>,
+    <span class="at">500</span>: <span class="st">'#3b82f6'</span>,  <span class="cm">// ← main brand color</span>
+    <span class="at">600</span>: <span class="st">'#2563eb'</span>,
+    <span class="at">700</span>: <span class="st">'#1d4ed8'</span>,
+    <span class="at">800</span>: <span class="st">'#1e40af'</span>,
+    <span class="at">900</span>: <span class="st">'#1e3a8a'</span>,
+},</code></pre>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon"><i data-lucide="alert-triangle" class="w-5 h-5"></i></span>
+                <span>Some hardcoded color values also exist in <code>css/style.css</code> (e.g., button gradients, scrollbar, glow effects). Search for <code>#22c55e</code> in <code>style.css</code> and replace those instances too for full consistency.</span>
+            </div>
+
+            <!-- Fonts -->
+            <h3 id="customization-fonts">Fonts</h3>
+            <p>BaGency uses two Google Fonts families:</p>
+            <ul>
+                <li><strong>Inter</strong> (<code>font-sans</code>) — Body text, UI elements</li>
+                <li><strong>Space Grotesk</strong> (<code>font-display</code>) — Headings, display text</li>
+            </ul>
+
+            <p>To change fonts, update these two locations:</p>
+
+            <p><strong>1. Google Fonts link</strong> in every HTML file's <code>&lt;head&gt;</code>:</p>
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">&lt;!-- Replace the fonts in the URL --&gt;</span>
+<span class="tg">&lt;link</span> <span class="at">href</span>=<span class="st">"https://fonts.googleapis.com/css2?family=YOUR+FONT:wght@400;500;600;700&amp;family=DISPLAY+FONT:wght@400;600;700&amp;display=swap"</span> <span class="at">rel</span>=<span class="st">"stylesheet"</span><span class="tg">&gt;</span></code></pre>
+            </div>
+
+            <p><strong>2. Tailwind config</strong> in <code>js/tailwind-config.js</code>:</p>
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">JavaScript — js/tailwind-config.js</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="pr">fontFamily</span>: {
+    <span class="at">sans</span>: [<span class="st">'Inter'</span>, <span class="st">'sans-serif'</span>],       <span class="cm">// ← body font</span>
+    <span class="at">display</span>: [<span class="st">'Space Grotesk'</span>, <span class="st">'sans-serif'</span>], <span class="cm">// ← heading font</span>
+},</code></pre>
+            </div>
+
+            <!-- Logo -->
+            <h3 id="customization-logo">Logo</h3>
+            <p>The default logo is text-based ("BaGency") with an icon badge. To replace it with your own image:</p>
+            <p><strong>Option A — Replace text with an image:</strong> Find the logo markup in each HTML file's navbar:</p>
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Find &amp; Replace in navbar</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">&lt;!-- BEFORE (text logo) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"index.html"</span> <span class="at">class</span>=<span class="st">"flex items-center space-x-2"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"w-10 h-10 bg-gradient-to-br ..."</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"text-white font-display font-bold text-xl"</span><span class="tg">&gt;</span>B<span class="tg">&lt;/span&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"font-display font-bold text-2xl"</span><span class="tg">&gt;</span>BaGency<span class="tg">&lt;/span&gt;</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- AFTER (image logo) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"index.html"</span> <span class="at">class</span>=<span class="st">"flex items-center"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;img</span> <span class="at">src</span>=<span class="st">"images/your-logo.svg"</span> <span class="at">alt</span>=<span class="st">"Your Brand"</span> <span class="at">class</span>=<span class="st">"h-10 w-auto"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/a&gt;</span></code></pre>
+            </div>
+
+            <p>Repeat this for the footer logo too (near the bottom of each page).</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon"><i data-lucide="info" class="w-5 h-5"></i></span>
+                <span>SVG logos are recommended for crisp rendering at any size. Place your logo image in an <code>images/</code> folder inside <code>bagency/</code>.</span>
+            </div>
+
+            <!-- Content -->
+            <h3 id="customization-content">Content</h3>
+            <p>BaGency uses two approaches for content:</p>
+
+            <p><strong>Dynamic content (data.js):</strong> Services, pricing, testimonials, FAQ, team members, and blog posts are stored in <code>js/data.js</code> as JavaScript arrays/objects. Edit these to update content across all pages at once.</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">JavaScript — js/data.js (example)</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="kw">const</span> <span class="pr">servicesData</span> = [
+    {
+        <span class="pr">icon</span>: <span class="st">'message-square'</span>,
+        <span class="pr">title</span>: <span class="st">'AI Chatbots'</span>,              <span class="cm">// ← Edit this</span>
+        <span class="pr">description</span>: <span class="st">'24/7 intelligent...'</span>, <span class="cm">// ← Edit this</span>
+        <span class="pr">features</span>: [<span class="st">'NLP'</span>, <span class="st">'Multi-language'</span>, <span class="st">'CRM'</span>],
+        <span class="pr">color</span>: <span class="st">'primary'</span>,
+    },
+    <span class="cm">// ... more services</span>
+];</code></pre>
+            </div>
+
+            <p><strong>Static content (HTML):</strong> About page text, legal page content, and blog post bodies are written directly in the HTML. Edit the corresponding file to update.</p>
+
+            <!-- Images -->
+            <h3 id="customization-images">Images</h3>
+            <p>Images are sourced from <strong>Unsplash</strong> via URL. To use your own images:</p>
+            <ol>
+                <li>Download or create your images and place them in an <code>images/</code> folder.</li>
+                <li>Search for the Unsplash URL in <code>data.js</code> (for dynamic content) or the HTML files (for static content).</li>
+                <li>Replace the URL with a relative path, e.g., <code>images/hero.jpg</code>.</li>
+            </ol>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">Before & After</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">// Before (Unsplash URL)</span>
+<span class="st">'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&amp;h=100&amp;fit=crop'</span>
+
+<span class="cm">// After (local image)</span>
+<span class="st">'images/team/sarah.jpg'</span></code></pre>
+            </div>
+
+            <!-- Icons -->
+            <h3 id="customization-icons">Icons</h3>
+            <p>BaGency uses <strong>Lucide Icons</strong> (via CDN). Icons are placed using the <code>data-lucide</code> attribute:</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Lucide Icon Usage</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">&lt;!-- Icon in HTML --&gt;</span>
+<span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"rocket"</span> <span class="at">class</span>=<span class="st">"w-5 h-5"</span><span class="tg">&gt;&lt;/i&gt;</span>
+
+<span class="cm">&lt;!-- Icon in data.js --&gt;</span>
+{ <span class="pr">icon</span>: <span class="st">'message-square'</span>, ... }</code></pre>
+            </div>
+
+            <p>To find icons, visit <a href="https://lucide.dev/icons" target="_blank" rel="noopener">lucide.dev/icons</a>. The icon name in the URL (e.g., <code>lucide.dev/icons/<strong>rocket</strong></code>) is the value you use for <code>data-lucide</code> or the <code>icon</code> property in <code>data.js</code>.</p>
+
+            <p>Size is controlled via Tailwind width/height classes: <code>w-4 h-4</code>, <code>w-5 h-5</code>, <code>w-6 h-6</code>, etc.</p>
+
+
+            <!-- ============================================
+                 SECTION 5 — PAGE GUIDE
+                 ============================================ -->
+            <h2 id="page-guide">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="layout" class="w-6 h-6 text-primary-500"></i>
+                    Page Guide
+                </span>
+            </h2>
+
+            <p>BaGency includes 16 pre-built pages. Here's a summary of each:</p>
+
+            <div class="docs-table-wrap"><table class="docs-table">
+                <thead>
+                    <tr><th>Page</th><th>File</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Homepage Classic</strong></td>
+                        <td><code>index.html</code></td>
+                        <td>Hero with dashboard mockup, services grid, process timeline, pricing, ROI calculator, testimonials, FAQ, CTA, footer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Homepage Premium</strong></td>
+                        <td><code>home2.html</code></td>
+                        <td>Bento grid layout, marquee text, logo carousel, glassmorphism cards, enhanced visual effects</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Homepage Animated</strong></td>
+                        <td><code>home3.html</code></td>
+                        <td>Dynamic animations, interactive hero, particle effects, animated counters, AI chatbot demo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>About</strong></td>
+                        <td><code>about.html</code></td>
+                        <td>Company story, mission & values, team grid with social links, stats counters</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Services</strong></td>
+                        <td><code>services.html</code></td>
+                        <td>Service cards grid, click-to-expand detail modals, features lists, CTA section</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Case Studies</strong></td>
+                        <td><code>case-studies.html</code></td>
+                        <td>Full case study cards with before/after metrics, industry tags, service labels, improvement badges</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pricing</strong></td>
+                        <td><code>pricing.html</code></td>
+                        <td>Three-tier pricing cards with monthly/yearly toggle, popular badge, feature comparison, FAQ</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blog</strong></td>
+                        <td><code>blog.html</code></td>
+                        <td>Blog listing with featured post, category tags, author avatars, read time estimates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blog Post</strong></td>
+                        <td><code>blog-single.html</code></td>
+                        <td>Individual article layout with rich typography, author bio, related posts, social share</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FAQ</strong></td>
+                        <td><code>faq.html</code></td>
+                        <td>Categorized FAQ accordion (Getting Started, Pricing, Features, Security), search-ready structure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact</strong></td>
+                        <td><code>contact.html</code></td>
+                        <td>Contact form, booking form with date/time picker, office info, map placeholder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Privacy Policy</strong></td>
+                        <td><code>privacy-policy.html</code></td>
+                        <td>Standard privacy policy template with placeholder content</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Terms of Service</strong></td>
+                        <td><code>terms-of-service.html</code></td>
+                        <td>Standard terms of service template with placeholder content</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cookie Policy</strong></td>
+                        <td><code>cookie-policy.html</code></td>
+                        <td>Standard cookie policy template with placeholder content</td>
+                    </tr>
+                </tbody>
+            </table></div>
+
+
+            <!-- ============================================
+                 SECTION 6 — COMPONENTS
+                 ============================================ -->
+            <h2 id="components">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="blocks" class="w-6 h-6 text-primary-500"></i>
+                    Components
+                </span>
+            </h2>
+
+            <p>BaGency includes a library of reusable UI components. These are defined in <code>css/style.css</code> and rendered by <code>js/main.js</code> (or placed directly in HTML).</p>
+
+            <!-- Buttons -->
+            <h3>Buttons</h3>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <a href="#" class="btn-primary" onclick="event.preventDefault()">Primary Button</a>
+                    <a href="#" class="btn-secondary" onclick="event.preventDefault()">Secondary Button</a>
+                    <a href="#" class="btn-primary btn-glow" onclick="event.preventDefault()">Glow Button</a>
+                </div>
+                <div class="component-card-label">Buttons — <code>.btn-primary</code> · <code>.btn-secondary</code> · <code>.btn-glow</code></div>
+            </div>
+
+            <p>Use the CSS classes directly in your HTML:</p>
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"#"</span> <span class="at">class</span>=<span class="st">"btn-primary"</span><span class="tg">&gt;</span>Get Started<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"#"</span> <span class="at">class</span>=<span class="st">"btn-secondary"</span><span class="tg">&gt;</span>Learn More<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"#"</span> <span class="at">class</span>=<span class="st">"btn-primary btn-glow"</span><span class="tg">&gt;</span>Start Free<span class="tg">&lt;/a&gt;</span></code></pre>
+            </div>
+
+            <!-- Glass Cards -->
+            <h3>Glass Cards</h3>
+            <p>The <code>.glass-card</code> class provides the signature frosted-glass effect:</p>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <div class="glass-card rounded-2xl p-6 w-full max-w-sm">
+                        <h4 class="font-display font-bold text-lg mb-2">Glass Card</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400" style="margin:0;">This card has a frosted glass background with backdrop blur. It adapts automatically to dark mode.</p>
+                    </div>
+                </div>
+                <div class="component-card-label">Glass Card — <code>.glass-card</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Glass Card</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"glass-card rounded-2xl p-6"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;h4</span> <span class="at">class</span>=<span class="st">"font-display font-bold text-lg mb-2"</span><span class="tg">&gt;</span>Card Title<span class="tg">&lt;/h4&gt;</span>
+    <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-sm text-gray-600 dark:text-gray-400"</span><span class="tg">&gt;</span>
+        Card content goes here.
+    <span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <!-- Service Card -->
+            <h3>Service Card</h3>
+            <p>Service cards feature an icon, title, description, and feature list with hover animations:</p>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <div class="card-service glass-card rounded-2xl p-6 w-full max-w-sm">
+                        <div class="w-14 h-14 bg-primary-500/10 rounded-xl flex items-center justify-center mb-4 relative z-10">
+                            <i data-lucide="message-square" class="w-7 h-7 text-primary-500"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold mb-3 relative z-10">AI Chatbots</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 relative z-10">24/7 intelligent customer support.</p>
+                        <ul class="space-y-2 relative z-10" style="margin:0;">
+                            <li class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-primary-500"></i> Natural Language
+                            </li>
+                            <li class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-primary-500"></i> Multi-language
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="component-card-label">Service Card — <code>.card-service.glass-card</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Service Card</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"card-service glass-card rounded-2xl p-6"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"w-14 h-14 bg-primary-500/10 rounded-xl flex items-center justify-center mb-4 relative z-10"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"message-square"</span> <span class="at">class</span>=<span class="st">"w-7 h-7 text-primary-500"</span><span class="tg">&gt;&lt;/i&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;h3</span> <span class="at">class</span>=<span class="st">"font-display text-xl font-bold mb-3 relative z-10"</span><span class="tg">&gt;</span>Service Title<span class="tg">&lt;/h3&gt;</span>
+    <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-gray-600 dark:text-gray-400 text-sm mb-4 relative z-10"</span><span class="tg">&gt;</span>Description text.<span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;ul</span> <span class="at">class</span>=<span class="st">"space-y-2 relative z-10"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;li</span> <span class="at">class</span>=<span class="st">"flex items-center text-sm text-gray-500 dark:text-gray-400"</span><span class="tg">&gt;</span>
+            <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"check-circle"</span> <span class="at">class</span>=<span class="st">"w-4 h-4 mr-2 text-primary-500"</span><span class="tg">&gt;&lt;/i&gt;</span> Feature One
+        <span class="tg">&lt;/li&gt;</span>
+        <span class="tg">&lt;li</span> <span class="at">class</span>=<span class="st">"flex items-center text-sm text-gray-500 dark:text-gray-400"</span><span class="tg">&gt;</span>
+            <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"check-circle"</span> <span class="at">class</span>=<span class="st">"w-4 h-4 mr-2 text-primary-500"</span><span class="tg">&gt;&lt;/i&gt;</span> Feature Two
+        <span class="tg">&lt;/li&gt;</span>
+    <span class="tg">&lt;/ul&gt;</span>
+<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <!-- Pricing Card -->
+            <h3>Pricing Card</h3>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <div class="card-pricing popular glass-card rounded-2xl p-6 w-full max-w-xs">
+                        <h4 class="font-display text-lg font-bold mb-1">Professional</h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-4">For growing businesses</p>
+                        <div class="mb-4">
+                            <span class="text-3xl font-display font-bold">$699</span>
+                            <span class="text-gray-500 dark:text-gray-400 text-sm">/month</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-sm">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-primary-500"></i> 3 AI Chatbots</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-primary-500"></i> 10,000 conversations/mo</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-primary-500"></i> Priority support</li>
+                        </ul>
+                        <a href="#" class="btn-primary btn-glow w-full block text-center text-sm" onclick="event.preventDefault()">Start Free Trial</a>
+                    </div>
+                </div>
+                <div class="component-card-label">Pricing Card — <code>.card-pricing.popular.glass-card</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Pricing Card</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"card-pricing popular glass-card rounded-2xl p-8"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;h3</span> <span class="at">class</span>=<span class="st">"font-display text-xl font-bold mb-2"</span><span class="tg">&gt;</span>Professional<span class="tg">&lt;/h3&gt;</span>
+    <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-gray-500 dark:text-gray-400 text-sm mb-6"</span><span class="tg">&gt;</span>For growing businesses<span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"mb-6"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"text-4xl font-display font-bold"</span><span class="tg">&gt;</span>$699<span class="tg">&lt;/span&gt;</span>
+        <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"text-gray-500 dark:text-gray-400"</span><span class="tg">&gt;</span>/month<span class="tg">&lt;/span&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;ul</span> <span class="at">class</span>=<span class="st">"space-y-3 mb-8"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;li</span> <span class="at">class</span>=<span class="st">"flex items-center text-sm"</span><span class="tg">&gt;</span>
+            <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"check"</span> <span class="at">class</span>=<span class="st">"w-4 h-4 mr-3 text-primary-500"</span><span class="tg">&gt;&lt;/i&gt;</span> Feature One
+        <span class="tg">&lt;/li&gt;</span>
+    <span class="tg">&lt;/ul&gt;</span>
+    <span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"#"</span> <span class="at">class</span>=<span class="st">"btn-primary btn-glow w-full block text-center"</span><span class="tg">&gt;</span>Start Free Trial<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <!-- Testimonial Card -->
+            <h3>Testimonial Card</h3>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <div class="testimonial-card glass-card rounded-2xl p-6 w-full max-w-sm">
+                        <div class="flex items-center space-x-1 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">"BaGency transformed our customer support. Response time went from 4 hours to under 30 seconds."</p>
+                        <div class="flex items-center space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <div class="avatar-gradient w-10 h-10 flex-shrink-0">
+                                <div class="bg-primary-500 text-white w-full h-full rounded-full flex items-center justify-center font-semibold text-sm">SJ</div>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Sarah Johnson</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">CEO, TechFlow Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card-label">Testimonial Card — <code>.testimonial-card.glass-card</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Testimonial Card</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"testimonial-card glass-card rounded-2xl p-6"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"flex items-center space-x-1 mb-3"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"star"</span> <span class="at">class</span>=<span class="st">"w-4 h-4 text-yellow-400 fill-current"</span><span class="tg">&gt;&lt;/i&gt;</span>
+        <span class="cm">&lt;!-- repeat 5 times --&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4"</span><span class="tg">&gt;</span>
+        "Customer testimonial quote text goes here."
+    <span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"flex items-center space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"avatar-gradient w-10 h-10 flex-shrink-0"</span><span class="tg">&gt;</span>
+            <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"bg-primary-500 text-white w-full h-full rounded-full flex items-center justify-center font-semibold text-sm"</span><span class="tg">&gt;</span>SJ<span class="tg">&lt;/div&gt;</span>
+        <span class="tg">&lt;/div&gt;</span>
+        <span class="tg">&lt;div&gt;</span>
+            <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"font-semibold text-sm"</span><span class="tg">&gt;</span>Sarah Johnson<span class="tg">&lt;/p&gt;</span>
+            <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-xs text-gray-500 dark:text-gray-400"</span><span class="tg">&gt;</span>CEO, TechFlow Inc.<span class="tg">&lt;/p&gt;</span>
+        <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <!-- Blog Card -->
+            <h3>Blog Card</h3>
+
+            <div class="component-card">
+                <div class="component-card-preview">
+                    <div class="blog-card glass-card rounded-2xl overflow-hidden w-full max-w-sm">
+                        <div class="h-40 bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center">
+                            <i data-lucide="image" class="w-10 h-10 text-gray-400"></i>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="px-2 py-0.5 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full">AI Chatbots</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">8 min read</span>
+                            </div>
+                            <h4 class="font-display text-base font-bold mb-2">How AI Chatbots Are Revolutionizing Customer Support</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm" style="margin:0;">Discover how businesses are using AI-powered chatbots...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card-label">Blog Card — <code>.blog-card.glass-card</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Blog Card</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"blog-single.html"</span> <span class="at">class</span>=<span class="st">"blog-card glass-card rounded-2xl overflow-hidden block group"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;img</span> <span class="at">src</span>=<span class="st">"image.jpg"</span> <span class="at">alt</span>=<span class="st">""</span> <span class="at">class</span>=<span class="st">"w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"p-6"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"flex items-center space-x-3 mb-3"</span><span class="tg">&gt;</span>
+            <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"px-3 py-1 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full"</span><span class="tg">&gt;</span>Category<span class="tg">&lt;/span&gt;</span>
+            <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"text-xs text-gray-500 dark:text-gray-400"</span><span class="tg">&gt;</span>8 min read<span class="tg">&lt;/span&gt;</span>
+        <span class="tg">&lt;/div&gt;</span>
+        <span class="tg">&lt;h3</span> <span class="at">class</span>=<span class="st">"font-display text-lg font-bold mb-2 group-hover:text-primary-500 transition-colors"</span><span class="tg">&gt;</span>
+            Blog Post Title
+        <span class="tg">&lt;/h3&gt;</span>
+        <span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"</span><span class="tg">&gt;</span>
+            Short excerpt of the blog post content.
+        <span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+<span class="tg">&lt;/a&gt;</span></code></pre>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <h3>FAQ Accordion</h3>
+
+            <div class="component-card">
+                <div class="component-card-preview" style="flex-direction:column;align-items:stretch;">
+                    <div class="faq-item glass-card w-full" data-index="0">
+                        <button class="faq-question px-5 py-4 flex items-center justify-between text-left w-full rounded-xl" onclick="this.closest('.faq-item').classList.toggle('active')">
+                            <span class="font-semibold text-sm pr-4">How quickly can I get started?</span>
+                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-5 pb-4 text-gray-600 dark:text-gray-400 text-sm">Most clients are up and running within 1-2 weeks. Our onboarding process includes a discovery call, strategy session, and implementation phase.</div>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card w-full" data-index="1">
+                        <button class="faq-question px-5 py-4 flex items-center justify-between text-left w-full rounded-xl" onclick="this.closest('.faq-item').classList.toggle('active')">
+                            <span class="font-semibold text-sm pr-4">Do I need technical knowledge?</span>
+                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-5 pb-4 text-gray-600 dark:text-gray-400 text-sm">Not at all! Our platform is designed for business users with a drag-and-drop interface that requires no coding.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card-label">FAQ Accordion — <code>.faq-item</code> · <code>.faq-question</code> · <code>.faq-answer</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — FAQ Accordion Item</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"faq-item glass-card"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;button</span> <span class="at">class</span>=<span class="st">"faq-question px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-xl w-full"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;span</span> <span class="at">class</span>=<span class="st">"font-semibold pr-4"</span><span class="tg">&gt;</span>Frequently asked question?<span class="tg">&lt;/span&gt;</span>
+        <span class="tg">&lt;i</span> <span class="at">data-lucide</span>=<span class="st">"chevron-down"</span> <span class="at">class</span>=<span class="st">"faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0"</span><span class="tg">&gt;&lt;/i&gt;</span>
+    <span class="tg">&lt;/button&gt;</span>
+    <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"faq-answer"</span><span class="tg">&gt;</span>
+        <span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"px-6 pb-5 text-gray-600 dark:text-gray-400"</span><span class="tg">&gt;</span>
+            Answer text goes here. The .faq-answer max-height animates on toggle.
+        <span class="tg">&lt;/div&gt;</span>
+    <span class="tg">&lt;/div&gt;</span>
+<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <!-- Forms -->
+            <h3>Forms</h3>
+            <p>Form inputs use the <code>.input-field</code> class for focus effects:</p>
+
+            <div class="component-card">
+                <div class="component-card-preview" style="flex-direction:column;align-items:stretch;">
+                    <input type="text" placeholder="Your Name" class="input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm mb-0">
+                    <input type="email" placeholder="your@email.com" class="input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm mb-0">
+                    <textarea rows="3" placeholder="Your message..." class="input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm mb-0"></textarea>
+                    <button class="btn-primary text-sm">Send Message</button>
+                </div>
+                <div class="component-card-label">Form Elements — <code>.input-field</code> · <code>.btn-primary</code></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Form Elements</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="tg">&lt;form</span> <span class="at">id</span>=<span class="st">"contact-form"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">placeholder</span>=<span class="st">"Your Name"</span>
+        <span class="at">class</span>=<span class="st">"input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">placeholder</span>=<span class="st">"your@email.com"</span>
+        <span class="at">class</span>=<span class="st">"input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;textarea</span> <span class="at">rows</span>=<span class="st">"4"</span> <span class="at">placeholder</span>=<span class="st">"Your message..."</span>
+        <span class="at">class</span>=<span class="st">"input-field w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm"</span><span class="tg">&gt;&lt;/textarea&gt;</span>
+    <span class="tg">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span> <span class="at">class</span>=<span class="st">"btn-primary w-full"</span><span class="tg">&gt;</span>Send Message<span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></code></pre>
+            </div>
+
+            <!-- Navigation -->
+            <h3>Navigation</h3>
+            <p>The navbar is included in every page and features:</p>
+            <ul>
+                <li>Fixed positioning with scroll-based background blur (<code>.navbar-scrolled</code>)</li>
+                <li>Dropdown menus for Home variants (Classic, Premium, Animated)</li>
+                <li>Mobile slide-in menu with submenu toggle</li>
+                <li>Dark mode toggle button</li>
+                <li>CTA button ("Book a Call")</li>
+            </ul>
+            <p>All navbar markup and behavior is self-contained in each HTML file and <code>js/main.js</code> functions: <code>initNavbar()</code>, <code>initMobileMenu()</code>.</p>
+
+            <!-- Footer -->
+            <h3>Footer</h3>
+            <p>The footer is a full-width dark section (<code>bg-gray-900</code>) with a 4-column grid: company info, quick links, services, and newsletter signup. It includes social media icons and a copyright bar. Edit the HTML directly in each page.</p>
+
+
+            <!-- ============================================
+                 SECTION 7 — DARK MODE
+                 ============================================ -->
+            <h2 id="dark-mode">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="moon" class="w-6 h-6 text-primary-500"></i>
+                    Dark Mode
+                </span>
+            </h2>
+
+            <p>BaGency uses Tailwind's <strong>class-based dark mode</strong> strategy. When the <code>dark</code> class is added to the <code>&lt;html&gt;</code> element, all <code>dark:</code> Tailwind utilities activate.</p>
+
+            <h3>How It Works</h3>
+            <ol>
+                <li>The theme toggle button in the navbar triggers <code>initTheme()</code> in <code>js/main.js</code>.</li>
+                <li>On click, it toggles the <code>dark</code> class on <code>document.documentElement</code>.</li>
+                <li>The user's preference is saved to <code>localStorage</code> under the key <code>"theme"</code>.</li>
+                <li>On page load, the saved preference is restored. If none exists, the system's <code>prefers-color-scheme</code> media query is used.</li>
+            </ol>
+
+            <h3>Customizing Dark Mode Colors</h3>
+            <p>Dark mode colors are applied via Tailwind's <code>dark:</code> prefix directly in the HTML classes. For example:</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Dark Mode Classes</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">&lt;!-- Background changes on dark mode --&gt;</span>
+<span class="tg">&lt;body</span> <span class="at">class</span>=<span class="st">"bg-white <span class="kw">dark:bg-gray-900</span> text-gray-900 <span class="kw">dark:text-white</span>"</span><span class="tg">&gt;</span>
+
+<span class="cm">&lt;!-- Glass card adapts --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"glass-card <span class="kw">dark:border-gray-700</span>"</span><span class="tg">&gt;</span>...<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Text color adapts --&gt;</span>
+<span class="tg">&lt;p</span> <span class="at">class</span>=<span class="st">"text-gray-600 <span class="kw">dark:text-gray-400</span>"</span><span class="tg">&gt;</span>...<span class="tg">&lt;/p&gt;</span></code></pre>
+            </div>
+
+            <p>The glassmorphism styles in <code>css/style.css</code> also have <code>.dark</code> scoped variants for backgrounds and borders. If you change the base background color, update both the light and dark variants.</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon"><i data-lucide="info" class="w-5 h-5"></i></span>
+                <span>To force dark mode on page load, add <code>class="dark"</code> directly to the <code>&lt;html&gt;</code> tag: <code>&lt;html lang="en" class="dark"&gt;</code>.</span>
+            </div>
+
+
+            <!-- ============================================
+                 SECTION 8 — ANIMATIONS
+                 ============================================ -->
+            <h2 id="animations">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-primary-500"></i>
+                    Animations
+                </span>
+            </h2>
+
+            <p>BaGency includes a rich animation system powered by CSS and JavaScript.</p>
+
+            <h3>Scroll Reveal</h3>
+            <p>Elements with the classes <code>.reveal</code>, <code>.reveal-left</code>, <code>.reveal-right</code>, or <code>.reveal-scale</code> automatically animate into view when scrolled into the viewport. This uses <code>IntersectionObserver</code> for performant, jank-free animations.</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">HTML — Scroll Reveal Classes</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="cm">&lt;!-- Fade up --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"reveal"</span><span class="tg">&gt;</span>Fades up from below<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Slide from left --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"reveal-left"</span><span class="tg">&gt;</span>Slides in from left<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Slide from right --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"reveal-right"</span><span class="tg">&gt;</span>Slides in from right<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Scale in --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"reveal-scale"</span><span class="tg">&gt;</span>Scales up into view<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Delayed reveal --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="st">"reveal"</span> <span class="at">style</span>=<span class="st">"transition-delay: 0.2s"</span><span class="tg">&gt;</span>Delayed<span class="tg">&lt;/div&gt;</span></code></pre>
+            </div>
+
+            <h3>Built-in Animation Classes</h3>
+            <p>These Tailwind animation utilities are defined in <code>js/tailwind-config.js</code>:</p>
+
+            <div class="docs-table-wrap"><table class="docs-table">
+                <thead>
+                    <tr><th>Class</th><th>Effect</th><th>Usage</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>animate-float</code></td><td>Gentle up-down floating</td><td>Hero elements, decorative cards</td></tr>
+                    <tr><td><code>animate-pulse-glow</code></td><td>Pulsing glow shadow</td><td>Status indicators, highlights</td></tr>
+                    <tr><td><code>animate-slide-up</code></td><td>Slide up + fade in</td><td>Content entrances</td></tr>
+                    <tr><td><code>animate-fade-in</code></td><td>Simple fade in</td><td>Subtle entrances</td></tr>
+                    <tr><td><code>animate-bounce-subtle</code></td><td>Gentle bounce</td><td>Trust badges, notifications</td></tr>
+                    <tr><td><code>animate-glow-pulse</code></td><td>Glowing pulse effect</td><td>CTA buttons</td></tr>
+                    <tr><td><code>animate-shimmer</code></td><td>Shimmer/shine sweep</td><td>Trust bars, loading states</td></tr>
+                    <tr><td><code>animate-scale-in</code></td><td>Scale up from small</td><td>Modal entries, badges</td></tr>
+                    <tr><td><code>animate-slide-in-left</code></td><td>Slide from left</td><td>Left-side content</td></tr>
+                    <tr><td><code>animate-slide-in-right</code></td><td>Slide from right</td><td>Right-side content</td></tr>
+                </tbody>
+            </table></div>
+
+            <h3>Adding Custom Animations</h3>
+            <p>To add a new animation, define it in <code>js/tailwind-config.js</code>:</p>
+
+            <div class="code-block">
+                <div class="code-block-header">
+                    <span class="code-block-lang">JavaScript — js/tailwind-config.js</span>
+                    <button class="code-block-copy" onclick="copyCode(this)"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+<pre><code><span class="pr">animation</span>: {
+    <span class="cm">// ... existing animations ...</span>
+    <span class="st">'spin-slow'</span>: <span class="st">'spinSlow 3s linear infinite'</span>,
+},
+<span class="pr">keyframes</span>: {
+    <span class="cm">// ... existing keyframes ...</span>
+    <span class="fn">spinSlow</span>: {
+        <span class="st">'0%'</span>: { <span class="pr">transform</span>: <span class="st">'rotate(0deg)'</span> },
+        <span class="st">'100%'</span>: { <span class="pr">transform</span>: <span class="st">'rotate(360deg)'</span> },
+    },
+},</code></pre>
+            </div>
+
+            <p>Then use it in HTML: <code>&lt;div class="animate-spin-slow"&gt;...&lt;/div&gt;</code></p>
+
+
+            <!-- ============================================
+                 SECTION 9 — DEPLOYMENT
+                 ============================================ -->
+            <h2 id="deployment">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="cloud" class="w-6 h-6 text-primary-500"></i>
+                    Deployment
+                </span>
+            </h2>
+
+            <p>Since BaGency is a static HTML template, it can be deployed to any web server or hosting platform. No server-side processing, databases, or build steps are needed.</p>
+
+            <h3>Netlify</h3>
+            <ol>
+                <li>Create a free account at <a href="https://netlify.com" target="_blank" rel="noopener">netlify.com</a>.</li>
+                <li>Drag and drop the <code>bagency/</code> folder onto the Netlify dashboard, <strong>or</strong> connect your Git repository.</li>
+                <li>If using Git, set the <strong>Publish directory</strong> to <code>public/bagency</code> (or wherever the folder lives in your repo).</li>
+                <li>Your site is live! Netlify provides a free <code>.netlify.app</code> subdomain.</li>
+            </ol>
+
+            <h3>Vercel</h3>
+            <ol>
+                <li>Sign up at <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a>.</li>
+                <li>Import your Git repository.</li>
+                <li>Set the <strong>Root Directory</strong> to the folder containing the template files.</li>
+                <li>Set <strong>Framework Preset</strong> to "Other".</li>
+                <li>Click Deploy.</li>
+            </ol>
+
+            <h3>GitHub Pages</h3>
+            <ol>
+                <li>Push your code to a GitHub repository.</li>
+                <li>Go to <strong>Settings → Pages</strong>.</li>
+                <li>Select the branch and folder (e.g., <code>main</code> branch, <code>/public/bagency</code> root).</li>
+                <li>Save — your site will be available at <code>https://username.github.io/repo-name/</code>.</li>
+            </ol>
+
+            <h3>cPanel / Traditional Hosting</h3>
+            <ol>
+                <li>Log into your hosting control panel (cPanel, Plesk, etc.).</li>
+                <li>Open the <strong>File Manager</strong> or connect via FTP/SFTP.</li>
+                <li>Navigate to your website's root directory (usually <code>public_html/</code>).</li>
+                <li>Upload the entire <code>bagency/</code> folder.</li>
+                <li>Visit <code>https://yourdomain.com/bagency/</code>.</li>
+            </ol>
+
+            <h3>Any Static Host</h3>
+            <p>BaGency works with <strong>any</strong> hosting that serves static files: AWS S3 + CloudFront, Firebase Hosting, Cloudflare Pages, DigitalOcean App Platform, etc. Simply upload the files and configure the root directory.</p>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon"><i data-lucide="lightbulb" class="w-5 h-5"></i></span>
+                <span>For clean URLs (e.g., <code>yourdomain.com/about</code> instead of <code>yourdomain.com/about.html</code>), most hosts support URL rewriting. On Netlify, create a <code>_redirects</code> file. On Apache, use <code>.htaccess</code>.</span>
+            </div>
+
+
+            <!-- ============================================
+                 SECTION 10 — CHANGELOG
+                 ============================================ -->
+            <h2 id="changelog">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="git-commit" class="w-6 h-6 text-primary-500"></i>
+                    Changelog
+                </span>
+            </h2>
+
+            <div class="glass-card rounded-2xl p-6 mb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-display text-lg font-bold" style="margin:0;">Version 1.0.0</h3>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">January 2026</span>
+                </div>
+                <ul style="margin:0;padding-left:1.25rem;">
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Initial release with 16 pre-built pages</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> 3 homepage variants (Classic, Premium, Animated)</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Glassmorphism design system with dark mode</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Interactive ROI calculator</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> AI chatbot demo component</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Testimonial slider with navigation</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> FAQ accordion with categories</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Centralized data architecture (data.js)</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Scroll reveal animation system</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Responsive mobile navigation with submenu</li>
+                    <li class="mb-2"><span class="changelog-tag changelog-new">New</span> Full documentation</li>
+                </ul>
+            </div>
+
+
+            <!-- ============================================
+                 SECTION 11 — SUPPORT & CREDITS
+                 ============================================ -->
+            <h2 id="support-credits">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="life-buoy" class="w-6 h-6 text-primary-500"></i>
+                    Support & Credits
+                </span>
+            </h2>
+
+            <h3>Support</h3>
+            <p>If you have questions, need help with customization, or encounter any issues, we're here to help!</p>
+
+            <div class="glass-card rounded-2xl p-6 mb-6">
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-primary-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="mail" class="w-5 h-5 text-primary-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-sm">Email Support</h4>
+                            <a href="mailto:support@bacodev.com" class="text-primary-500 text-sm">support@bacodev.com</a>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" style="margin:0;">We typically respond within 24 hours.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-primary-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="globe" class="w-5 h-5 text-primary-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-sm">Website</h4>
+                            <a href="https://bacodev.com" target="_blank" rel="noopener" class="text-primary-500 text-sm">bacodev.com</a>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" style="margin:0;">Visit for more templates & updates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Credits</h3>
+            <p>BaGency is built with the following open-source libraries and resources:</p>
+
+            <div class="credit-item">
+                <div class="credit-icon bg-sky-500/10">
+                    <i data-lucide="wind" class="w-5 h-5 text-sky-500"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm" style="margin:0;">Tailwind CSS</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400" style="margin:0;">Utility-first CSS framework — <a href="https://tailwindcss.com" target="_blank" rel="noopener">tailwindcss.com</a></p>
+                </div>
+            </div>
+            <div class="credit-item">
+                <div class="credit-icon bg-orange-500/10">
+                    <i data-lucide="pen-tool" class="w-5 h-5 text-orange-500"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm" style="margin:0;">Lucide Icons</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400" style="margin:0;">Beautiful open-source icons — <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a></p>
+                </div>
+            </div>
+            <div class="credit-item">
+                <div class="credit-icon bg-blue-500/10">
+                    <i data-lucide="type" class="w-5 h-5 text-blue-500"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm" style="margin:0;">Google Fonts</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400" style="margin:0;">Inter (body) + Space Grotesk (headings) — <a href="https://fonts.google.com" target="_blank" rel="noopener">fonts.google.com</a></p>
+                </div>
+            </div>
+            <div class="credit-item">
+                <div class="credit-icon bg-pink-500/10">
+                    <i data-lucide="image" class="w-5 h-5 text-pink-500"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm" style="margin:0;">Unsplash</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400" style="margin:0;">Placeholder images — <a href="https://unsplash.com" target="_blank" rel="noopener">unsplash.com</a></p>
+                </div>
+            </div>
+
+            <h3>License</h3>
+            <p>BaGency is developed by <strong>BACODEV</strong>. By purchasing this template, you receive a license to use it for your personal or commercial projects. Please refer to the license terms provided at the time of purchase for specific usage rights and restrictions.</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon"><i data-lucide="info" class="w-5 h-5"></i></span>
+                <span>Thank you for choosing BaGency! We hope you enjoy building with it. If you find it useful, a rating or review on the marketplace where you purchased it means the world to us. 🚀</span>
+            </div>
+
+            <!-- Bottom spacer -->
+            <div style="height:2rem"></div>
+        </main>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ========== MINIMAL INLINE SCRIPTS ========== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ——— Theme Toggle ———
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+            themeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            });
+        }
+
+        // ——— Navbar Scroll ———
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+            }, { passive: true });
+        }
+
+        // ——— Back to Top ———
+        const btt = document.getElementById('back-to-top');
+        if (btt) {
+            window.addEventListener('scroll', function() {
+                btt.classList.toggle('visible', window.scrollY > 500);
+            }, { passive: true });
+            btt.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // ——— Sidebar Mobile Toggle ———
+        const sidebar = document.getElementById('docs-sidebar');
+        const sidebarToggle = document.getElementById('docs-sidebar-toggle');
+        const sidebarOverlay = document.getElementById('docs-sidebar-overlay');
+
+        window.closeSidebar = function() {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        if (sidebarToggle && sidebar) {
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Close sidebar when a TOC link is clicked on mobile
+        document.querySelectorAll('.toc-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // ——— TOC Active State ———
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = [];
+        tocLinks.forEach(function(link) {
+            var id = link.getAttribute('data-section');
+            var el = document.getElementById(id);
+            if (el) sections.push({ id: id, el: el, link: link });
+        });
+
+        function updateActiveTOC() {
+            var scrollY = window.scrollY + 120;
+            var current = sections[0];
+            for (var i = 0; i < sections.length; i++) {
+                if (sections[i].el.offsetTop <= scrollY) {
+                    current = sections[i];
+                }
+            }
+            if (current) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                current.link.classList.add('active');
+            }
+        }
+
+        window.addEventListener('scroll', updateActiveTOC, { passive: true });
+        updateActiveTOC();
+
+        // ——— Copy Code Block ———
+        window.copyCode = function(btn) {
+            var block = btn.closest('.code-block');
+            var code = block.querySelector('code');
+            if (!code) return;
+            var text = code.textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                var orig = btn.innerHTML;
+                btn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i> Copied!';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+                setTimeout(function() {
+                    btn.innerHTML = orig;
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }, 2000);
+            });
+        };
+
+        // ——— Initialize Lucide Icons ———
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+    })();
+    </script>
+
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

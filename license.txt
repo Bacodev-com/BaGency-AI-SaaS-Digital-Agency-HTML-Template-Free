@@ -1,0 +1,85 @@
+================================================================================
+                         BACODEV PERSONAL USE LICENSE
+================================================================================
+                         Template: BaGency
+                         Version:  1.0.0
+                         Date:     April 8, 2026
+                         Issued by: BaCodev (https://bacodev.com)
+================================================================================
+
+BY DOWNLOADING, INSTALLING, OR USING THIS TEMPLATE ("THE WORK"), YOU AGREE TO
+BE BOUND BY THIS LICENSE AGREEMENT.
+
+--------------------------------------------------------------------------------
+                         1. LICENSE TYPE
+--------------------------------------------------------------------------------
+
+This template is released for FREE PERSONAL USE ONLY.
+
+Originally, BaGency was a paid premium product. It is now shared for free to
+help developers and learners build personal projects.
+
+--------------------------------------------------------------------------------
+                         2. PERMITTED USE
+--------------------------------------------------------------------------------
+
+You may:
+
+- Use the template for personal, educational, and non-commercial projects.
+- Modify the code for your own personal use.
+
+--------------------------------------------------------------------------------
+                         3. PROHIBITED USE
+--------------------------------------------------------------------------------
+
+You may NOT:
+
+- Sell the template.
+- Resell or redistribute the source code (modified or unmodified).
+- Use the template for client projects.
+- Use the template for commercial projects.
+- Use the template in SaaS products or third-party deliverables.
+- Include the template in paid bundles, paid downloads, or marketplaces.
+
+--------------------------------------------------------------------------------
+                         4. CREDIT REQUIREMENT
+--------------------------------------------------------------------------------
+
+Credit is REQUIRED in all pages’ footer.
+
+Required credit text:
+
+Template by BaCodev (bacodev.com)
+
+The credit may be styled small and unobtrusive, but must remain visible.
+
+--------------------------------------------------------------------------------
+                         5. COMMERCIAL LICENSE
+--------------------------------------------------------------------------------
+
+If you want to use this template for:
+- client work,
+- commercial/business projects,
+- SaaS/web apps,
+- third-party usage,
+
+you must obtain a commercial license from BaCodev.
+
+Contact: support@bacodev.com
+
+--------------------------------------------------------------------------------
+                         6. OWNERSHIP
+--------------------------------------------------------------------------------
+
+All intellectual property rights for the original template remain with BaCodev.
+This license grants usage rights only under the terms above.
+
+--------------------------------------------------------------------------------
+                         7. DISCLAIMER
+--------------------------------------------------------------------------------
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+IN NO EVENT SHALL BACODEV BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY
+ARISING FROM THE USE OF THE WORK.
+
+================================================================================

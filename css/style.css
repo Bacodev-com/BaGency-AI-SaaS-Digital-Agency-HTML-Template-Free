@@ -1,0 +1,1306 @@
+/*!
+ BaGency Template by BaCodev
+ Free for personal use only
+ https://bacodev.com
+ */
+
+/**
+ * @file        style.css
+ * @description Shared stylesheet for the BaGency AI Automation Agency template.
+ *              Contains glassmorphism design system, component styles,
+ *              animations, dark mode support, and responsive utilities.
+ * @version     1.0.0
+ * @author      BaGency
+ * @license     Commercial
+ * 
+ * Design System:
+ *   - Primary Color: Green (#22c55e) — trust, growth, technology
+ *   - Accent Color:  Purple (#8b5cf6) — creativity, innovation
+ *   - Typography: Inter (body) + Space Grotesk (display)
+ *   - Glassmorphism: backdrop-filter blur with semi-transparent backgrounds
+ *   - Dark Mode: Class-based (.dark) with smooth transitions
+ * 
+ * Dependencies:
+ *   - Tailwind CSS (via CDN) — utility classes
+ *   - Lucide Icons (via CDN) — icon system
+ *   - Google Fonts — Inter, Space Grotesk
+ */
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   Universal box-sizing reset, overflow control, and base font family.
+   Inter is set as the default body font for optimal readability.
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   DARK MODE TRANSITIONS
+   Smooth 0.3s transitions on background, color, border, and box-shadow
+   for theme switching. Applied to all major interactive components to
+   prevent jarring visual jumps when toggling between light and dark modes.
+   ========================================================================== */
+
+body, .glass-card, .btn-primary, .btn-secondary, .card-service, .card-pricing {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ----- GLASSMORPHISM DESIGN SYSTEM -----
+   Core glass effect using backdrop-filter: blur(20px) combined with
+   semi-transparent backgrounds (rgba). This creates a frosted-glass
+   appearance that lets background content show through with a soft
+   blur. The -webkit prefix ensures Safari support. In dark mode,
+   the background shifts to a dark semi-transparent tone and the
+   border becomes subtler to maintain the glass aesthetic.
+   ----- */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-card {
+    background: rgba(30, 30, 40, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   BUTTON STYLES
+   Primary and secondary button variants with hover effects and animations.
+   The primary button uses a green gradient background with a built-in
+   shimmer sweep effect on hover for visual polish.
+   ========================================================================== */
+
+.btn-primary {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(34, 197, 94, 0.5);
+}
+
+/* Shimmer effect: A ::before pseudo-element is positioned off-screen
+   to the left (left: -100%). On hover, it slides across to left: 100%,
+   creating a quick diagonal light sweep. The gradient goes from
+   transparent → white at 30% opacity → transparent, producing a
+   highlight that mimics light reflecting off a glossy surface.
+   The parent's overflow: hidden clips the pseudo-element. */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Button Glow Animation — adds a pulsing glow to draw attention (e.g. CTAs) */
+.btn-glow {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(34, 197, 94, 0.5);
+    color: #22c55e;
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.btn-secondary:hover {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: #22c55e;
+    transform: translateY(-2px);
+}
+
+/* ----- CARD HOVER EFFECTS -----
+   Service cards use cubic-bezier(0.175, 0.885, 0.32, 1.275) — an
+   "ease-out-back" curve that overshoots slightly before settling,
+   giving the card a playful, springy lift on hover. The ::before
+   pseudo-element provides a subtle green gradient overlay that fades
+   in on hover to add depth to the card surface.
+   ----- */
+
+.card-service {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-service::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.card-service:hover::before {
+    opacity: 1;
+}
+
+.card-service:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.dark .card-service:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ----- PRICING CARD — POPULAR VARIANT -----
+   The popular pricing card uses z-index: 10 and transform: scale(1.08)
+   (desktop only) to visually pop out from the pricing grid. The double
+   box-shadow (0 0 0 1px outline + spread shadow) creates a green halo
+   that reinforces the "recommended" status. A ::before pseudo-element
+   generates the "🔥 Most Popular" badge pill positioned above the card
+   using absolute positioning + translateX(-50%) for horizontal centering.
+   ----- */
+
+.card-pricing.popular {
+    border: 3px solid #22c55e;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2), 
+                0 25px 50px -12px rgba(34, 197, 94, 0.35);
+}
+
+@media (min-width: 768px) {
+    /* Scale up only on desktop to avoid layout overflow on mobile */
+    .card-pricing.popular {
+        transform: scale(1.08);
+    }
+}
+
+.dark .card-pricing.popular {
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.3), 
+                0 25px 50px -12px rgba(34, 197, 94, 0.4);
+}
+
+/* "Most Popular" badge — generated via CSS content property to avoid
+   extra HTML markup. Positioned at top: -14px so it floats above
+   the card border. translateX(-50%) centers it horizontally. */
+.card-pricing.popular::before {
+    content: '\1F525 Most Popular';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+    white-space: nowrap;
+}
+
+/* ----- SAVE BADGE -----
+   Positioned in the top-right corner of pricing cards to display
+   discount percentages. Uses amber/gold gradient to stand out
+   against the green/purple design system.
+   ----- */
+
+.save-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+/* ----- HERO & PAGE BACKGROUNDS -----
+   Subtle gradient overlays used behind hero sections and inner page
+   headers. In dark mode, opacity is increased (0.03 → 0.08) to remain
+   visible against darker backgrounds.
+   ----- */
+
+/* Animated Background — hero section gradient tint */
+.hero-bg {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.03) 0%, 
+        rgba(139, 92, 246, 0.03) 50%, 
+        rgba(34, 197, 94, 0.03) 100%);
+}
+
+.dark .hero-bg {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.08) 0%, 
+        rgba(139, 92, 246, 0.08) 50%, 
+        rgba(34, 197, 94, 0.08) 100%);
+}
+
+/* Page Header Background — inner page section headers */
+.page-header-bg {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.03) 0%, 
+        rgba(139, 92, 246, 0.03) 50%, 
+        rgba(34, 197, 94, 0.03) 100%);
+}
+
+.dark .page-header-bg {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.08) 0%, 
+        rgba(139, 92, 246, 0.08) 50%, 
+        rgba(34, 197, 94, 0.08) 100%);
+}
+
+/* ----- MESH GRADIENT ANIMATION -----
+   Creates an ambient animated background using two large radial-gradient
+   circles (pseudo-elements) that float with the "float" keyframe.
+   The ::before element is a green orb (top-right), and ::after is a
+   purple orb (bottom-left). Using `min(700px, 90vw)` ensures the orbs
+   scale down gracefully on small viewports. The animation uses the
+   `reverse` direction on ::after to create organic, opposing motion.
+   The container is absolutely positioned with pointer-events: none
+   so it serves purely as a decorative backdrop layer.
+   ----- */
+
+.mesh-gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Green orb — positioned top-right, floats upward on 8s cycle */
+.mesh-gradient::before {
+    content: '';
+    position: absolute;
+    width: min(700px, 90vw);
+    height: min(700px, 90vw);
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+    top: -200px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+/* Purple orb — positioned bottom-left, floats on 10s cycle in reverse
+   direction to create organic, non-synchronized motion */
+.mesh-gradient::after {
+    content: '';
+    position: absolute;
+    width: min(600px, 85vw);
+    height: min(600px, 85vw);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+    bottom: -150px;
+    left: -100px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+/* ----- COUNTER DISPLAY -----
+   font-variant-numeric: tabular-nums ensures all digits have equal
+   width so counters don't shift layout as numbers animate up.
+   ----- */
+
+.counter {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ----- TYPING INDICATOR -----
+   Three animated dots that simulate a typing state in the chatbot.
+   Each dot uses the "typing" blink animation with staggered delays
+   (0s, 0.2s, 0.4s) to create a wave-like pulsing effect.
+   ----- */
+
+.typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* ----- MOBILE OVERFLOW SAFEGUARDS -----
+   Prevents images and SVGs from exceeding their container width on
+   small screens. max-width: 100% on .glass-card ensures glass panels
+   never bleed outside their parent, even when nested in narrow
+   containers with padding.
+   ----- */
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.glass-card {
+    max-width: 100%;
+}
+
+/* ----- CUSTOM SCROLLBAR (Webkit) -----
+   Thin 8px scrollbar with green-tinted thumb that brightens on hover.
+   Track is transparent to blend with the page background.
+   ----- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(34, 197, 94, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(34, 197, 94, 0.5);
+}
+
+/* ----- FAQ ACCORDION -----
+   Uses the max-height transition technique for smooth expand/collapse:
+   - Collapsed: max-height: 0 with overflow: hidden and opacity: 0
+   - Expanded (.active): max-height: 500px with opacity: 1
+   The !important declarations override any inline styles set by JS.
+   The cubic-bezier(0.4, 0, 0.2, 1) curve (Material Design standard easing)
+   provides a natural deceleration on open. The chevron icon rotates
+   180° on .active to indicate the expanded state.
+   ----- */
+
+.faq-item {
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+}
+
+/* Collapsed state — max-height: 0 clips content entirely.
+   The !important ensures JS-toggled inline styles don't conflict. */
+.faq-answer {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* Expanded state — max-height: 500px is generously sized to
+   accommodate long FAQ answers without clipping. */
+.faq-item.active .faq-answer {
+    max-height: 500px !important;
+    opacity: 1;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-question {
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+/* FAQ initially hidden — redundant safety rule ensuring uncollapsed
+   items are hidden even if the default .faq-answer rule is overridden */
+.faq-item:not(.active) .faq-answer {
+    max-height: 0 !important;
+    opacity: 0;
+}
+
+/* ----- TESTIMONIAL SLIDER -----
+   Horizontal flex container that slides via CSS transform controlled
+   by JavaScript. The 0.5s ease transition provides smooth card panning.
+   ----- */
+
+.testimonial-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+/* ----- INPUT FOCUS EFFECTS -----
+   Custom focus ring using box-shadow instead of outline for a softer,
+   more polished appearance. The 3px spread + 0.1 opacity green shadow
+   creates a subtle halo without adding border-width.
+   ----- */
+
+.input-field {
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* ----- RANGE SLIDER (Custom) -----
+   Overrides native range input appearance for consistent cross-browser
+   styling. The thumb uses the primary green gradient and scales up
+   slightly on hover for better affordance.
+   ----- */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: rgba(34, 197, 94, 0.2);
+    border-radius: 4px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(34, 197, 94, 0.4);
+    transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+/* ----- PROCESS TIMELINE -----
+   Vertical connecting line between timeline steps. Uses a ::before
+   pseudo-element on each timeline-item with a gradient that fades
+   from solid green to transparent. The last item hides the line
+   to avoid a trailing connector.
+   ----- */
+
+.timeline-item {
+    position: relative;
+}
+
+/* Vertical connector line — starts 60px from top (below the step
+   number/icon) and extends to the bottom of the item */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    width: 2px;
+    height: calc(100% - 60px);
+    background: linear-gradient(180deg, #22c55e 0%, rgba(34, 197, 94, 0.1) 100%);
+    transform: translateX(-50%);
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+/* ----- GLOW EFFECTS -----
+   Ambient glow utilities for emphasizing key elements. "glow-strong"
+   uses a dual-layer box-shadow for a more intense, diffused glow.
+   ----- */
+
+.glow {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.glow-strong {
+    box-shadow: 0 0 60px rgba(34, 197, 94, 0.4), 0 0 100px rgba(34, 197, 94, 0.2);
+}
+
+/* ----- MOBILE MENU -----
+   Uses the translateX transform pattern for GPU-accelerated slide
+   animation. The menu starts off-screen at translateX(100%) and
+   slides in with translateX(0) when the .active class is toggled.
+   This approach is smoother than animating left/right properties
+   because transforms don't trigger layout recalculation.
+   ----- */
+
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* ----- CHATBOT MESSAGE -----
+   Each new chat message slides up into view using the slideUp
+   keyframe for a natural conversational feel.
+   ----- */
+
+.chat-message {
+    animation: slideUp 0.3s ease-out;
+}
+
+/* ----- DASHBOARD CHART -----
+   Smooth height transition for animated chart bars that grow
+   from zero when the dashboard section scrolls into view.
+   ----- */
+
+.chart-bar {
+    transition: height 0.5s ease;
+}
+
+/* ----- NAVBAR SCROLL EFFECT -----
+   When scrolled, the navbar gains a near-opaque frosted glass
+   background (95% opacity) with backdrop blur and a subtle shadow.
+   This provides contrast against content scrolling beneath the
+   fixed header while maintaining the glassmorphism design language.
+   ----- */
+
+.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.dark .navbar-scrolled {
+    background: rgba(30, 30, 40, 0.95);
+}
+
+/* ----- STATUS PULSE -----
+   Animated ring that expands outward and fades, commonly used for
+   "online" or "live" status indicators. The pulse animation scales
+   the ::before pseudo-element to 1.5× while fading to zero opacity.
+   ----- */
+
+.status-pulse {
+    position: relative;
+}
+
+.status-pulse::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   Reusable animation definitions referenced throughout the stylesheet.
+   Each keyframe is self-contained and can be applied to any element
+   via the animation property.
+   ========================================================================== */
+
+/* glowPulse — Pulsing glow shadow with subtle scale breathing effect */
+@keyframes glowPulse {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+        transform: scale(1)
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.3);
+        transform: scale(1.02)
+    }
+}
+
+/* float — Gentle vertical bobbing (±20px) for decorative elements */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) }
+    50% { transform: translateY(-20px) }
+}
+
+/* typing — Opacity blink for chatbot typing indicator dots */
+@keyframes typing {
+    0%, 100% { opacity: 1 }
+    50% { opacity: 0 }
+}
+
+/* slideUp — Fade in + slide up from 30px below (used for chat messages) */
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px) }
+    100% { opacity: 1; transform: translateY(0) }
+}
+
+/* fadeIn — Simple opacity transition from invisible to visible */
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+/* bounceSubtle — Gentle vertical bounce (±5px) for floating badges */
+@keyframes bounceSubtle {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-5px) }
+}
+
+/* scaleIn — Scale up from 90% with fade (used for metric badges) */
+@keyframes scaleIn {
+    0% { opacity: 0; transform: scale(0.9) }
+    100% { opacity: 1; transform: scale(1) }
+}
+
+/* slideInLeft — Entry from 50px left with fade */
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-50px) }
+    100% { opacity: 1; transform: translateX(0) }
+}
+
+/* slideInRight — Entry from 50px right with fade */
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(50px) }
+    100% { opacity: 1; transform: translateX(0) }
+}
+
+/* shimmer — Horizontal background-position sweep for loading/skeletion effects */
+@keyframes shimmer {
+    0% { background-position: -200% 0 }
+    100% { background-position: 200% 0 }
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ANIMATIONS
+   Elements start invisible (opacity: 0, offset by 30–50px) and transition
+   to their final position when the .revealed class is added by the
+   IntersectionObserver in main.js. Four directional variants are provided:
+     - .reveal      — fade up (default)
+     - .reveal-left — slide from left
+     - .reveal-right — slide from right
+     - .reveal-scale — scale up from center
+   All use cubic-bezier(0.175, 0.885, 0.32, 1.275) for a slight
+   overshoot/spring effect that makes the entrance feel dynamic.
+   ========================================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ----- TRUST BAR SHIMMER -----
+   Continuously scrolling shimmer effect behind the client logos bar.
+   Uses the shimmer keyframe with a 200% wide background that pans
+   horizontally, creating a subtle light sweep across the logos.
+   ----- */
+
+.trust-bar {
+    animation: shimmer 3s linear infinite;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(34, 197, 94, 0.1) 50%, 
+        transparent 100%);
+    background-size: 200% 100%;
+}
+
+/* ----- COMPANY LOGO PLACEHOLDER -----
+   Flexible container for client/partner logos in the trust bar.
+   Centers content and applies subtle rounded corners.
+   ----- */
+
+.company-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+/* ----- TESTIMONIAL CARD -----
+   Subtle lift effect on hover with enhanced shadow. In dark mode,
+   the shadow is deepened to maintain perceived elevation.
+   ----- */
+
+.testimonial-card {
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .testimonial-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ----- AVATAR WITH GRADIENT BORDER -----
+   Creates a green-to-purple gradient ring around avatar images.
+   Uses padding: 3px on the outer container with a gradient background,
+   then the inner image fills the remaining space with border-radius: 50%.
+   This CSS-only technique avoids complex border-image workarounds.
+   ----- */
+
+.avatar-gradient {
+    position: relative;
+    padding: 3px;
+    background: linear-gradient(135deg, #22c55e, #8b5cf6);
+    border-radius: 50%;
+}
+
+.avatar-gradient img,
+.avatar-gradient div {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+/* ----- METRIC BADGE ANIMATION -----
+   Metrics that appear in the ROI calculator use scaleIn to pop
+   into view when values change, giving tangible feedback.
+   ----- */
+
+.metric-badge {
+    animation: scaleIn 0.5s ease-out;
+}
+
+/* ----- CTA GLOW EFFECT -----
+   Adds a blurred gradient halo behind CTA sections on hover.
+   The ::before pseudo-element uses inset: -2px to extend slightly
+   beyond the parent, with filter: blur(10px) to diffuse the glow.
+   z-index: -1 keeps the glow behind the content layer.
+   ----- */
+
+.cta-glow {
+    position: relative;
+}
+
+.cta-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #22c55e, #8b5cf6);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.cta-glow:hover::before {
+    opacity: 0.5;
+}
+
+/* ----- FLOATING TRUST BADGES -----
+   Trust indicators (e.g. "500+ Projects", "99% Uptime") use
+   staggered bounceSubtle animations with nth-child delays for
+   a wave-like floating effect.
+   ----- */
+
+.trust-badge-float {
+    animation: bounceSubtle 3s ease-in-out infinite;
+}
+
+.trust-badge-float:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.trust-badge-float:nth-child(3) {
+    animation-delay: 1s;
+}
+
+/* ----- PAGE HEADER GRADIENT -----
+   Lightweight green-to-purple gradient overlay for inner page
+   headers. Increased opacity in dark mode for visibility.
+   ----- */
+
+.page-header-gradient {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.05) 0%, 
+        rgba(139, 92, 246, 0.05) 100%);
+}
+
+.dark .page-header-gradient {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.1) 0%, 
+        rgba(139, 92, 246, 0.1) 100%);
+}
+
+/* ----- BLOG CARD -----
+   Card component for blog post listings with lift hover effect.
+   ----- */
+
+.blog-card {
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .blog-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ----- BREADCRUMB NAVIGATION -----
+   Provides hierarchical page navigation for inner pages (e.g.
+   Home > Blog > Post Title). The current page is highlighted in
+   green with medium weight. Separators are dimmed to create visual
+   hierarchy between path segments.
+   ----- */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.breadcrumb a {
+    color: rgba(107, 114, 128, 1);
+    transition: color 0.3s ease;
+}
+
+.dark .breadcrumb a {
+    color: rgba(156, 163, 175, 1);
+}
+
+.breadcrumb a:hover {
+    color: #22c55e;
+}
+
+.breadcrumb .separator {
+    color: rgba(156, 163, 175, 0.5);
+}
+
+.breadcrumb .current {
+    color: #22c55e;
+    font-weight: 500;
+}
+
+/* ----- TEAM CARD -----
+   Team member cards with subtle lift on hover. Enhanced shadow
+   in dark mode compensates for reduced ambient contrast.
+   ----- */
+
+.team-card {
+    transition: all 0.4s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+}
+
+.dark .team-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ----- BLOG CONTENT TYPOGRAPHY -----
+   Rich text styles for blog post bodies. Uses Space Grotesk for
+   headings to differentiate from the Inter body text. Generous
+   line-height (1.7–1.8) ensures comfortable long-form reading.
+   Blockquotes use a green left border as a visual accent.
+   ----- */
+
+.blog-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+.blog-content blockquote {
+    border-left: 4px solid #22c55e;
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: rgba(107, 114, 128, 1);
+}
+
+.dark .blog-content blockquote {
+    color: rgba(156, 163, 175, 1);
+}
+
+.blog-content img {
+    border-radius: 1rem;
+    margin: 1.5rem 0;
+}
+
+.blog-content a {
+    color: #22c55e;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.blog-content a:hover {
+    color: #16a34a;
+}
+
+/* ----- NAVIGATION ACTIVE STATES -----
+   Highlights the current page link in the desktop and mobile nav.
+   Uses !important to override Tailwind utility classes that may
+   set conflicting colors. In dark mode, the active color shifts
+   to a lighter green (#4ade80) for adequate contrast.
+   ----- */
+
+.nav-link.active {
+    color: #22c55e !important;
+}
+
+.dark .nav-link.active {
+    color: #4ade80 !important;
+}
+
+/* Mobile Nav Active Link */
+.mobile-nav-link.active {
+    color: #22c55e;
+}
+
+/* ----- BACK TO TOP BUTTON -----
+   Fixed-position circular button that appears after scrolling past
+   the first viewport. Uses opacity + visibility (instead of display)
+   for smooth fade-in/out transitions. The button starts invisible
+   and gains the .visible class via JS IntersectionObserver.
+   ----- */
+
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    z-index: 40;
+    border: none;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+}
+
+/* ==========================================================================
+   NAVIGATION DROPDOWN MENUS
+   Desktop dropdown menus triggered by hover or JS .open class.
+   The menu is positioned absolutely below the toggle with
+   translateX(-50%) for horizontal centering. It starts invisible
+   (opacity: 0, visibility: hidden) and offset 8px downward, then
+   transitions to its final position (translateY: 0) on reveal.
+   cubic-bezier(0.16, 1, 0.3, 1) provides a fast-in, slow-out
+   "expo" easing for a snappy feel.
+   ========================================================================== */
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Chevron icon rotates 180° to indicate open state */
+.nav-dropdown-toggle svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-toggle svg,
+.nav-dropdown.open .nav-dropdown-toggle svg {
+    transform: rotate(180deg);
+}
+
+/* Dropdown panel — starts 8px below toggle, fades in and slides up
+   to its final position. min-width: 220px ensures consistent sizing
+   regardless of content length. */
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 220px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 60;
+}
+
+.dark .nav-dropdown-menu {
+    background: #1f2937;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Revealed state — translateY returns to 0, opacity becomes 1 */
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown menu items — flex layout with icon + label */
+.nav-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.dark .nav-dropdown-menu a {
+    color: #d1d5db;
+}
+
+.nav-dropdown-menu a:hover {
+    background: rgba(34, 197, 94, 0.08);
+    color: #22c55e;
+}
+
+.nav-dropdown-menu a.active {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* Icon container within dropdown items — fixed 36px square */
+.nav-dropdown-menu .dropdown-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Label text with small descriptive subtitle */
+.nav-dropdown-menu .dropdown-label small {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #9ca3af;
+    margin-top: 1px;
+}
+
+.dark .nav-dropdown-menu .dropdown-label small {
+    color: #6b7280;
+}
+
+/* ----- MOBILE HOME SUBMENU -----
+   Accordion-style submenu for the mobile navigation "Home" item.
+   Uses the same max-height transition pattern as the FAQ accordion:
+   collapsed = max-height: 0, expanded (.open) = max-height: 300px.
+   The cubic-bezier(0.16, 1, 0.3, 1) curve gives a smooth,
+   slightly springy expand animation.
+   ----- */
+
+.mobile-home-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-home-submenu.open {
+    max-height: 300px;
+}
+
+.mobile-home-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Chevron rotates on open */
+.mobile-home-toggle svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.mobile-home-toggle.open svg {
+    transform: rotate(180deg);
+}
+
+/* Submenu link items — indented 16px from left for visual hierarchy */
+.mobile-home-submenu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6b7280;
+    transition: color 0.2s ease;
+}
+
+.dark .mobile-home-submenu a {
+    color: #9ca3af;
+}
+
+.mobile-home-submenu a:hover,
+.mobile-home-submenu a.active {
+    color: #22c55e;
+}
+
+/* Small icon container within submenu items */
+.mobile-home-submenu .sub-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}

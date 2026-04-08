@@ -1,0 +1,598 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | BaGency</title>
+    <!--
+        Page: 404 Error
+        Purpose: Friendly error page displayed when a user navigates to a non-existent route
+        Sections: Navbar, 404 Hero (illustration + message + search + quick links), Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: initScrollReveal(), floating animation CSS, typing effect on subtitle
+    -->
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Let BaGency help you find your way back.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Page-specific styles for 404 illustration and animations -->
+    <style>
+        /* ==========================================================================
+           404 ERROR PAGE - CUSTOM STYLES
+           Unique animations and visual effects for the error page.
+           ========================================================================== */
+
+        /* Large "404" number — uses gradient text with a subtle floating animation.
+           The text is extremely large (clamp 8–20rem) to create visual impact.
+           A text-shadow with green tint gives it a soft glow effect. */
+        .error-code {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(8rem, 20vw, 20rem);
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 40%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: errorFloat 6s ease-in-out infinite;
+            position: relative;
+            user-select: none;
+        }
+
+        /* Dark mode variant — shifts gradient to lighter tones for contrast */
+        .dark .error-code {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 40%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* Floating animation for the 404 number — gentle vertical bob (±15px) */
+        @keyframes errorFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Decorative glitch bars — thin horizontal lines that animate across
+           the 404 number to create a digital "broken" effect. */
+        .glitch-bar {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.3), transparent);
+            height: 2px;
+            border-radius: 2px;
+            animation: glitchScan 3s ease-in-out infinite;
+        }
+
+        .glitch-bar:nth-child(1) {
+            width: 60%;
+            top: 30%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .glitch-bar:nth-child(2) {
+            width: 45%;
+            top: 55%;
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        .glitch-bar:nth-child(3) {
+            width: 70%;
+            top: 75%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        /* Glitch scan animation — bars sweep horizontally with opacity pulse */
+        @keyframes glitchScan {
+            0%, 100% { opacity: 0; transform: translateX(-20px); }
+            50% { opacity: 1; transform: translateX(20px); }
+        }
+
+        /* Floating geometric shapes — decorative elements scattered around
+           the error section for visual depth. Each shape uses a different
+           animation duration and delay for organic, non-synchronized motion. */
+        .float-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: shapeFloat 8s ease-in-out infinite;
+        }
+
+        .dark .float-shape {
+            opacity: 0.1;
+        }
+
+        .float-shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: #22c55e;
+            top: 15%;
+            left: 10%;
+            animation-duration: 7s;
+        }
+
+        .float-shape:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            background: #8b5cf6;
+            top: 25%;
+            right: 15%;
+            animation-duration: 9s;
+            animation-delay: 1s;
+        }
+
+        .float-shape:nth-child(3) {
+            width: 35px;
+            height: 35px;
+            background: #f59e0b;
+            bottom: 30%;
+            left: 20%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+
+        .float-shape:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            background: #22c55e;
+            bottom: 20%;
+            right: 10%;
+            animation-duration: 10s;
+            animation-delay: 0.5s;
+        }
+
+        .float-shape:nth-child(5) {
+            width: 25px;
+            height: 25px;
+            background: #8b5cf6;
+            top: 40%;
+            left: 5%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+
+        .float-shape:nth-child(6) {
+            width: 40px;
+            height: 40px;
+            background: #22c55e;
+            top: 10%;
+            right: 30%;
+            animation-duration: 11s;
+            animation-delay: 1.5s;
+            border-radius: 8px; /* Square shape for variety */
+        }
+
+        @keyframes shapeFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-3deg); }
+            75% { transform: translateY(-25px) rotate(2deg); }
+        }
+
+        /* Typing cursor blink for the subtitle text effect */
+        .typing-cursor::after {
+            content: '|';
+            animation: cursorBlink 1s step-end infinite;
+            color: #22c55e;
+            font-weight: 300;
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Search input — custom focus ring using box-shadow for a softer
+           appearance that matches the glassmorphism design language. */
+        .search-input {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark .search-input {
+            background: rgba(30, 30, 40, 0.8);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .dark .search-input:focus {
+            background: rgba(30, 30, 40, 0.95);
+            border-color: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+        }
+
+        /* Quick link cards — glassmorphism panels with subtle hover lift */
+        .quick-link {
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .quick-link:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Robot illustration container — subtle breathing animation */
+        .robot-container {
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                    <span class="text-white font-display font-bold text-xl">B</span>
+                </div>
+                <span class="font-display font-bold text-2xl">BaGency</span>
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Home Dropdown -->
+                <div class="nav-dropdown">
+                    <span class="nav-dropdown-toggle nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">
+                        Home <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                    <div class="nav-dropdown-menu">
+                        <a href="index.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors">
+                            <span class="dropdown-icon bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">C</span>
+                            <span class="dropdown-label">Classic <small>Traditional layout</small></span>
+                        </a>
+                        <a href="home2.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors">
+                            <span class="dropdown-icon bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400">P</span>
+                            <span class="dropdown-label">Premium <small>Bento grid layout</small></span>
+                        </a>
+                        <a href="home3.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors">
+                            <span class="dropdown-icon bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">A</span>
+                            <span class="dropdown-label">Animated <small>Dynamic & interactive</small></span>
+                        </a>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                <a href="blog.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+            </div>
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+                </button>
+                <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== MOBILE MENU ========== -->
+<div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden">
+    <div class="p-6">
+        <button id="mobile-menu-close" class="absolute top-6 right-6"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <div class="mt-12 space-y-6">
+            <!-- Home with submenu toggle -->
+            <div>
+                <button class="mobile-home-toggle text-lg font-medium hover:text-primary-500 transition-colors" id="mobile-home-toggle">
+                    Home <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="mobile-home-submenu" id="mobile-home-submenu">
+                    <a href="index.html" class="flex items-center gap-2.5 py-2 pl-4 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
+                        <span class="sub-icon bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">C</span> Classic
+                    </a>
+                    <a href="home2.html" class="flex items-center gap-2.5 py-2 pl-4 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
+                        <span class="sub-icon bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400">P</span> Premium
+                    </a>
+                    <a href="home3.html" class="flex items-center gap-2.5 py-2 pl-4 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
+                        <span class="sub-icon bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">A</span> Animated
+                    </a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a>
+            <a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a>
+            <a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a>
+            <a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a>
+            <a href="blog.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a>
+            <a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a>
+            <a href="contact.html" class="btn-primary inline-flex mt-4"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a>
+        </div>
+    </div>
+</div>
+
+<!-- ========== 404 HERO SECTION ========== -->
+<section class="min-h-screen flex items-center justify-center hero-bg relative overflow-hidden pt-20">
+    <!-- Animated mesh gradient background -->
+    <div class="mesh-gradient"></div>
+
+    <!-- Floating decorative shapes -->
+    <div class="float-shape"></div>
+    <div class="float-shape"></div>
+    <div class="float-shape"></div>
+    <div class="float-shape"></div>
+    <div class="float-shape"></div>
+    <div class="float-shape"></div>
+
+    <!-- Main 404 content -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20">
+        <!-- Robot / Illustration -->
+        <div class="reveal robot-container mb-8">
+            <div class="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-primary-500/20">
+                <i data-lucide="bot" class="w-14 h-14 text-primary-500"></i>
+            </div>
+        </div>
+
+        <!-- Large 404 Error Code -->
+        <div class="reveal relative inline-block mb-6" style="transition-delay: 0.1s">
+            <span class="error-code">404</span>
+            <!-- Glitch scan bars overlaying the number -->
+            <div class="glitch-bar"></div>
+            <div class="glitch-bar"></div>
+            <div class="glitch-bar"></div>
+        </div>
+
+        <!-- Error title -->
+        <h1 class="reveal font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6" style="transition-delay: 0.2s">
+            Page Not Found
+        </h1>
+
+        <!-- Error description -->
+        <p class="reveal text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed" style="transition-delay: 0.3s">
+            Oops! The page you're looking for seems to have wandered off into the digital void. Don't worry — our AI is already searching for it.
+        </p>
+
+        <!-- Search bar -->
+        <div class="reveal max-w-lg mx-auto mb-12" style="transition-delay: 0.4s">
+            <div class="relative">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Search for what you need..." 
+                    class="search-input w-full pl-12 pr-4 py-4 rounded-2xl text-base font-medium text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                >
+            </div>
+            <p id="search-hint" class="text-sm text-gray-400 dark:text-gray-500 mt-3 hidden">
+                Try: <span class="text-primary-500 cursor-pointer hover:underline" onclick="navigateTo('services.html')">services</span>, 
+                <span class="text-primary-500 cursor-pointer hover:underline" onclick="navigateTo('pricing.html')">pricing</span>, 
+                <span class="text-primary-500 cursor-pointer hover:underline" onclick="navigateTo('contact.html')">contact</span>, 
+                or <span class="text-primary-500 cursor-pointer hover:underline" onclick="navigateTo('blog.html')">blog</span>
+            </p>
+        </div>
+
+        <!-- Primary action buttons -->
+        <div class="reveal flex flex-col sm:flex-row gap-4 justify-center mb-16" style="transition-delay: 0.5s">
+            <a href="index.html" class="btn-primary btn-glow inline-flex items-center justify-center px-8 py-4 text-base">
+                <i data-lucide="home" class="w-5 h-5 mr-2"></i>
+                Back to Home
+            </a>
+            <a href="contact.html" class="btn-secondary inline-flex items-center justify-center px-8 py-4 text-base">
+                <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                Contact Support
+            </a>
+        </div>
+
+        <!-- Quick links grid -->
+        <div class="reveal" style="transition-delay: 0.6s">
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+                Popular Pages
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <a href="services.html" class="quick-link glass-card rounded-2xl p-5 text-center group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-shadow">
+                        <i data-lucide="layers" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-sm font-semibold">Services</span>
+                </a>
+                <a href="pricing.html" class="quick-link glass-card rounded-2xl p-5 text-center group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-accent-500/20 group-hover:shadow-accent-500/40 transition-shadow">
+                        <i data-lucide="tag" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-sm font-semibold">Pricing</span>
+                </a>
+                <a href="case-studies.html" class="quick-link glass-card rounded-2xl p-5 text-center group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-yellow-500/20 group-hover:shadow-yellow-500/40 transition-shadow">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-sm font-semibold">Case Studies</span>
+                </a>
+                <a href="faq.html" class="quick-link glass-card rounded-2xl p-5 text-center group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-rose-500/20 group-hover:shadow-rose-500/40 transition-shadow">
+                        <i data-lucide="help-circle" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-sm font-semibold">FAQ</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <!-- Brand Column -->
+            <div>
+                <a href="index.html" class="flex items-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                        <span class="text-white font-display font-bold text-xl">B</span>
+                    </div>
+                    <span class="font-display font-bold text-2xl">BaGency</span>
+                </a>
+                <p class="text-gray-400 mb-6">Transform your business with cutting-edge AI automation solutions. Save time, reduce costs, and scale efficiently.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li>
+                    <li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li>
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li>
+                    <li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li>
+                    <li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li>
+                    <li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li>
+                    <li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Services -->
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li>
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li>
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li>
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li>
+                    <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div>
+                <h4 class="font-semibold text-lg mb-6">Contact</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center space-x-3"><i data-lucide="mail" class="w-5 h-5 text-primary-400"></i><a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a></li>
+                    <li class="flex items-center space-x-3"><i data-lucide="phone" class="w-5 h-5 text-primary-400"></i><a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a></li>
+                    <li class="flex items-start space-x-3"><i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i><span class="text-gray-400">123 AI Street, Tech City, TC 12345</span></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Bottom bar -->
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a>
+                <a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<button id="back-to-top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+
+<!-- 404 Page-specific Script: Search functionality -->
+<script>
+    /**
+     * 404 Page — Interactive search & navigation helpers
+     * Provides a simple keyword-to-page mapping so users can
+     * quickly find what they're looking for from the error page.
+     */
+    (function() {
+        // Page search mapping — keywords redirect to relevant pages
+        const pageMap = [
+            { keywords: ['home', 'main', 'index', 'landing', 'start'], url: 'index.html' },
+            { keywords: ['about', 'team', 'mission', 'vision', 'who'], url: 'about.html' },
+            { keywords: ['service', 'automation', 'chatbot', 'ai', 'workflow', 'crm', 'marketing'], url: 'services.html' },
+            { keywords: ['case', 'study', 'portfolio', 'project', 'work', 'result'], url: 'case-studies.html' },
+            { keywords: ['price', 'pricing', 'plan', 'cost', 'package', 'subscription'], url: 'pricing.html' },
+            { keywords: ['blog', 'article', 'news', 'post', 'insight', 'update'], url: 'blog.html' },
+            { keywords: ['contact', 'reach', 'email', 'call', 'support', 'help', 'talk'], url: 'contact.html' },
+            { keywords: ['faq', 'question', 'answer', 'common'], url: 'faq.html' },
+            { keywords: ['privacy', 'data', 'policy', 'gdpr'], url: 'privacy-policy.html' },
+            { keywords: ['term', 'legal', 'condition', 'agreement'], url: 'terms-of-service.html' },
+            { keywords: ['cookie', 'tracking'], url: 'cookie-policy.html' },
+            { keywords: ['doc', 'documentation', 'guide', 'setup', 'install'], url: 'documentation.html' }
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const searchHint = document.getElementById('search-hint');
+
+        // Show search suggestions when input is focused
+        if (searchInput) {
+            searchInput.addEventListener('focus', function() {
+                searchHint.classList.remove('hidden');
+            });
+
+            // Search on Enter key — matches input against keyword map
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const query = this.value.toLowerCase().trim();
+
+                    if (!query) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    // Find best matching page
+                    for (const page of pageMap) {
+                        if (page.keywords.some(kw => kw.includes(query) || query.includes(kw))) {
+                            window.location.href = page.url;
+                            return;
+                        }
+                    }
+
+                    // No match found — navigate to services as a safe fallback
+                    window.location.href = 'services.html';
+                }
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchHint.contains(e.target)) {
+                    searchHint.classList.add('hidden');
+                }
+            });
+        }
+    })();
+
+    /**
+     * Global navigation helper — used by inline onclick handlers
+     * in the search hint suggestions. Simple redirect wrapper.
+     */
+    function navigateTo(url) {
+        window.location.href = url;
+    }
+</script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

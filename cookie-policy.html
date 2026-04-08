@@ -1,0 +1,198 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaGency - Cookie Policy</title>
+    <!--
+        Page: Cookie Policy
+        Purpose: Legal page explaining cookie types, usage, and management options
+        Sections: Navbar, Page Header, Cookie Policy Content (what are cookies, types used, third-party cookies, managing preferences, updates), Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: initScrollReveal() (shared navbar/footer behavior)
+    -->
+    <meta name="description" content="Learn how BaGency uses cookies and similar tracking technologies on our website. Manage your cookie preferences.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div>
+                <span class="font-display font-bold text-2xl">BaGency</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Home</a>
+                <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                <a href="blog.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"><i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i><i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i></button>
+                <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a>
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- ========== MOBILE MENU ========== -->
+<div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden"><div class="p-6"><button id="mobile-menu-close" class="absolute top-6 right-6"><i data-lucide="x" class="w-6 h-6"></i></button><div class="mt-12 space-y-6"><a href="index.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Home</a><a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a><a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a><a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a><a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a><a href="blog.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a><a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a><a href="contact.html" class="btn-primary inline-flex mt-4"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a></div></div></div>
+
+<!-- ========== PAGE HEADER ========== -->
+<section class="pt-32 pb-16 page-header-bg relative">
+    <div class="mesh-gradient"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="reveal breadcrumb justify-center mb-6">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Cookie Policy</span>
+            </div>
+            <h1 class="reveal font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+                Cookie <span class="text-primary-500">Policy</span>
+            </h1>
+            <p class="reveal text-gray-600 dark:text-gray-400 text-lg max-w-xl mx-auto">
+                Understand how BaGency uses cookies and similar technologies to improve your browsing experience.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== COOKIE POLICY CONTENT ========== -->
+<section class="py-20 lg:py-32">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal glass-card rounded-3xl p-8 lg:p-12">
+            <div class="blog-content">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-8"><i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> Last updated: January 15, 2026</p>
+
+                <p>This Cookie Policy explains how BaGency ("we," "our," or "us") uses cookies and similar tracking technologies when you visit our website. Cookies are small text files that are placed on your device to help us provide a better user experience, analyze site traffic, and personalize content. This policy should be read alongside our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+
+                <h2>1. What Are Cookies</h2>
+                <p>Cookies are small data files stored on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently, provide a better browsing experience, and supply information to the owners of the site.</p>
+                <p>Cookies can be "persistent" (remaining on your device until they expire or you delete them) or "session" cookies (deleted automatically when you close your browser). Cookies may be set by the website you are visiting ("first-party cookies") or by third-party services operating on that website ("third-party cookies").</p>
+
+                <h2>2. How We Use Cookies</h2>
+                <p>We use cookies for several essential purposes:</p>
+                <ul>
+                    <li><strong>Essential Functionality:</strong> To remember your preferences and settings, maintain your session, and ensure the basic functions of our website work properly.</li>
+                    <li><strong>Analytics & Performance:</strong> To understand how visitors interact with our website, identify popular pages, and measure the effectiveness of our content. This helps us improve our website and services.</li>
+                    <li><strong>Personalization:</strong> To remember your choices and tailor your experience, such as displaying relevant content or remembering your language preference.</li>
+                    <li><strong>Marketing & Advertising:</strong> To deliver targeted advertisements, measure the effectiveness of advertising campaigns, and track conversions from our marketing efforts.</li>
+                </ul>
+
+                <h2>3. Types of Cookies We Use</h2>
+
+                <h3>Strictly Necessary Cookies</h3>
+                <p>These cookies are essential for the website to function properly and cannot be disabled. They are set in response to actions made by you, such as setting your privacy preferences, logging in, or filling in forms.</p>
+                <ul>
+                    <li><strong>session_id</strong> — Maintains your session while you navigate the website (session cookie)</li>
+                    <li><strong>theme_preference</strong> — Remembers your light/dark mode preference (persistent, 1 year)</li>
+                    <li><strong>cookie_consent</strong> — Records your cookie consent choice (persistent, 1 year)</li>
+                </ul>
+
+                <h3>Analytics Cookies</h3>
+                <p>These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. This allows us to optimize our website performance and user experience.</p>
+                <ul>
+                    <li><strong>_ga</strong> — Used by Google Analytics to distinguish unique visitors (persistent, 2 years)</li>
+                    <li><strong>_ga_*</strong> — Used by Google Analytics to maintain session state (persistent, 2 years)</li>
+                    <li><strong>_gid</strong> — Used by Google Analytics to distinguish unique visitors (persistent, 24 hours)</li>
+                    <li><strong>_gat</strong> — Used by Google Analytics to throttle request rate (persistent, 1 minute)</li>
+                </ul>
+
+                <h3>Functional Cookies</h3>
+                <p>These cookies enable enhanced functionality and personalization, such as remembering your region, language, or previously entered form data to make your return visits more convenient.</p>
+                <ul>
+                    <li><strong>preferred_language</strong> — Remembers your selected language (persistent, 1 year)</li>
+                    <li><strong>recent_pages</strong> — Tracks recently viewed pages for quick navigation (persistent, 30 days)</li>
+                </ul>
+
+                <h3>Marketing Cookies</h3>
+                <p>These cookies are used to track visitors across websites to display relevant advertisements. They are set by advertising partners and help us measure the effectiveness of our marketing campaigns.</p>
+                <ul>
+                    <li><strong>_fbp</strong> — Used by Facebook to deliver targeted advertisements (persistent, 90 days)</li>
+                    <li><strong>_gcl_au</strong> — Used by Google Ads to track conversions (persistent, 90 days)</li>
+                    <li><strong>ads_prefs</strong> — Stores ad preference settings (persistent, 2 years)</li>
+                </ul>
+
+                <h2>4. Third-Party Cookies</h2>
+                <p>In addition to our own cookies, we may use cookies set by third-party services that operate on our website. These third parties include:</p>
+                <ul>
+                    <li><strong>Google Analytics:</strong> For website traffic analysis and reporting</li>
+                    <li><strong>Google Ads:</strong> For measuring advertising conversions and remarketing</li>
+                    <li><strong>Meta (Facebook):</strong> For social media pixel tracking and targeted advertising</li>
+                    <li><strong>LinkedIn:</strong> For B2B advertising and insight tracking</li>
+                    <li><strong>HubSpot:</strong> For CRM integration and lead tracking</li>
+                </ul>
+                <p>These third-party cookies are subject to the respective privacy policies of those providers. We do not control the setting of these cookies and recommend reviewing the privacy policies of these third-party services.</p>
+
+                <h2>5. Managing Your Cookie Preferences</h2>
+                <p>You have the right to decide whether to accept or reject cookies. You can manage your cookie preferences in the following ways:</p>
+                <ul>
+                    <li><strong>Cookie Banner:</strong> When you first visit our website, a cookie consent banner will appear, allowing you to accept or customize your cookie preferences.</li>
+                    <li><strong>Browser Settings:</strong> You can configure your browser to block or delete cookies through its settings. Visit your browser's help documentation for instructions.</li>
+                    <li><strong>Opt-Out Links:</strong> You can opt out of specific tracking cookies by visiting the opt-out pages provided by analytics and advertising services (e.g., Google Analytics Opt-out, Network Advertising Initiative Opt-out).</li>
+                    <li><strong>Mobile Devices:</strong> On mobile devices, you can manage cookie settings through your device's privacy settings.</li>
+                </ul>
+                <p>Please note that disabling certain cookies may affect the functionality of our website and limit your ability to use some features.</p>
+
+                <h2>6. Changes to This Policy</h2>
+                <p>We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our data practices. Any changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically to stay informed about how we use cookies.</p>
+                <p>If we make significant changes to this Cookie Policy, we will provide appropriate notice, such as updating the cookie consent banner or notifying you via our website.</p>
+
+                <h2>7. Contact Us</h2>
+                <p>If you have any questions about our use of cookies or this Cookie Policy, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> privacy@bacodev.com</li>
+                    <li><strong>Phone:</strong> +1 (234) 567-890</li>
+                    <li><strong>Address:</strong> 123 AI Street, Tech City, TC 12345</li>
+                </ul>
+                <p>For more information about how we handle your personal data, please see our <a href="privacy-policy.html">Privacy Policy</a>. For information about the terms governing your use of our website, please see our <a href="terms-of-service.html">Terms of Service</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <a href="index.html" class="flex items-center space-x-2 mb-6"><div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div><span class="font-display font-bold text-2xl">BaGency</span></a>
+                <p class="text-gray-400 mb-6">Transform your business with cutting-edge AI automation solutions.</p>
+                <div class="flex space-x-4"><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
+            </div>
+            <div><h4 class="font-semibold text-lg mb-6">Quick Links</h4><ul class="space-y-3"><li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li><li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li><li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li><li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li><li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li><li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Services</h4><ul class="space-y-3"><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Contact</h4><ul class="space-y-3"><li class="flex items-center space-x-3"><i data-lucide="mail" class="w-5 h-5 text-primary-400"></i><a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a></li><li class="flex items-center space-x-3"><i data-lucide="phone" class="w-5 h-5 text-primary-400"></i><a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a></li><li class="flex items-start space-x-3"><i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i><span class="text-gray-400">123 AI Street, Tech City, TC 12345</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+            <div class="flex space-x-6 mt-4 md:mt-0"><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a><a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<!-- ========== JAVASCRIPT ========== -->
+<button id="back-to-top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

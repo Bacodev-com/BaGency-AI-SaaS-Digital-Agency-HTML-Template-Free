@@ -1,0 +1,1164 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaGency – Premium AI Agency | Transform Your Business</title>
+    <!--
+        Page: Homepage Premium (H2)
+        Purpose: Premium homepage variant with bento grid layout, marquee logos, and enhanced animations
+        Sections: Navbar, Hero (text reveal animation), Marquee Logos, Bento Feature Grid, Stats/Impact, Services, Process/How It Works, Case Studies/Results, Testimonials, Pricing Teaser, FAQ, Final CTA, Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: renderServices(), renderProcess(), renderTestimonials(), renderFAQ(), initCounters(), initScrollReveal(), h2-reveal & stagger-children CSS animations
+    -->
+    <meta name="description" content="BaGency is a premium AI automation agency helping businesses scale with intelligent solutions. 500+ clients, $12M+ revenue generated.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Shared Tailwind Config -->
+    <script src="js/tailwind-config.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Home2 Specific Styles -->
+    <style>
+        /* === PREMIUM HERO === */
+        .hero-premium {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        .dark .hero-grid-bg {
+            background-image: 
+                linear-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.06) 1px, transparent 1px);
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(34, 197, 94, 0.15);
+            top: -10%;
+            right: -5%;
+            animation: orbFloat1 12s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(139, 92, 246, 0.12);
+            bottom: -10%;
+            left: -5%;
+            animation: orbFloat2 10s ease-in-out infinite;
+        }
+
+        .hero-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(6, 182, 212, 0.08);
+            top: 40%;
+            left: 30%;
+            animation: orbFloat3 14s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, 20px) scale(1.05); }
+            66% { transform: translate(20px, -15px) scale(0.95); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(25px, -20px) scale(1.08); }
+            66% { transform: translate(-15px, 25px) scale(0.92); }
+        }
+
+        @keyframes orbFloat3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, -30px) scale(1.1); }
+        }
+
+        /* Text reveal animation */
+        .text-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .text-reveal-line {
+            display: block;
+            transform: translateY(100%);
+            animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .text-reveal-line:nth-child(2) { animation-delay: 0.15s; }
+        .text-reveal-line:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes textRevealUp {
+            to { transform: translateY(0); }
+        }
+
+        .hero-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s ease-out forwards;
+        }
+
+        .hero-fade-in-delay-1 { animation-delay: 0.3s; }
+        .hero-fade-in-delay-2 { animation-delay: 0.5s; }
+        .hero-fade-in-delay-3 { animation-delay: 0.7s; }
+
+        @keyframes heroFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === MARQUEE === */
+        .marquee-track {
+            display: flex;
+            animation: marqueeScroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-mask {
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+
+        /* === BENTO GRID === */
+        .bento-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark .bento-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .bento-card .bento-icon {
+            transition: transform 0.4s ease;
+        }
+
+        .bento-card:hover .bento-icon {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* === SERVICE CARD 3D TILT === */
+        .service-card-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .service-card-3d:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card-3d .service-number {
+            transition: all 0.4s ease;
+        }
+
+        .service-card-3d:hover .service-number {
+            color: rgba(34, 197, 94, 0.15);
+            transform: translateX(4px);
+        }
+
+        /* === STATS SECTION === */
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.3), transparent);
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .stat-item::after {
+                display: none;
+            }
+        }
+
+        /* === TESTIMONIAL SPOTLIGHT === */
+        .testimonial-spotlight {
+            position: relative;
+        }
+
+        .testimonial-spotlight::before {
+            content: '\201C';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 120px;
+            font-family: 'Space Grotesk', serif;
+            line-height: 1;
+            color: rgba(34, 197, 94, 0.08);
+            pointer-events: none;
+        }
+
+        /* === PROGRESS BAR ANIMATION === */
+        .progress-fill {
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-fill.animated {
+            width: var(--target-width);
+        }
+
+        /* === FLOATING ELEMENTS === */
+        .float-element {
+            animation: floatElement 6s ease-in-out infinite;
+        }
+
+        @keyframes floatElement {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        /* === GRADIENT BORDER === */
+        .gradient-border {
+            position: relative;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.3));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+        }
+
+        /* === CTA SHIMMER === */
+        .cta-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            animation: ctaShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes ctaShimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* === PARTICLE DOTS === */
+        .dot-pattern {
+            background-image: radial-gradient(circle, rgba(34, 197, 94, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .dark .dot-pattern {
+            background-image: radial-gradient(circle, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
+        }
+
+        /* Smooth scroll-triggered reveals for home2 */
+        .h2-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .h2-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-children.revealed > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+        .stagger-children.revealed > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .stagger-children.revealed > *:nth-child(3) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+        .stagger-children.revealed > *:nth-child(4) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .stagger-children.revealed > *:nth-child(5) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        .stagger-children.revealed > *:nth-child(6) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    
+    <!-- ========== NAVBAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                        <span class="text-white font-display font-bold text-xl">B</span>
+                    </div>
+                    <span class="font-display font-bold text-2xl">BaGency</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="nav-dropdown">
+                        <span class="nav-link nav-dropdown-toggle active text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                        <div class="nav-dropdown-menu">
+                            <a href="index.html">
+                                <span class="dropdown-icon bg-gradient-to-br from-primary-500 to-primary-600 text-white">H1</span>
+                                <span class="dropdown-label">Classic<small>The original homepage</small></span>
+                            </a>
+                            <a href="home2.html" class="active">
+                                <span class="dropdown-icon bg-gradient-to-br from-cyan-500 to-cyan-600 text-white">H2</span>
+                                <span class="dropdown-label">Premium<small>Bento grid &amp; marquee</small></span>
+                            </a>
+                            <a href="home3.html">
+                                <span class="dropdown-icon bg-gradient-to-br from-violet-500 to-violet-600 text-white">H3</span>
+                                <span class="dropdown-label">Animated<small>Dynamic &amp; interactive</small></span>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                    <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                    <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                    <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                    <a href="blog.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                    <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+                    <a href="documentation.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Docs</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm">
+                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                        Book a Call
+                    </a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ========== MOBILE MENU ========== -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden">
+        <div class="p-6">
+            <button id="mobile-menu-close" class="absolute top-6 right-6">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="mt-12 space-y-6">
+                <div>
+                    <button class="mobile-home-toggle mobile-nav-link active block text-lg font-medium hover:text-primary-500 transition-colors" id="mobile-home-btn">
+                        Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="mobile-home-submenu" id="mobile-home-submenu">
+                        <a href="index.html"><span class="sub-icon bg-gradient-to-br from-primary-500 to-primary-600 text-white text-xs">H1</span> Classic</a>
+                        <a href="home2.html" class="active"><span class="sub-icon bg-gradient-to-br from-cyan-500 to-cyan-600 text-white text-xs">H2</span> Premium</a>
+                        <a href="home3.html"><span class="sub-icon bg-gradient-to-br from-violet-500 to-violet-600 text-white text-xs">H3</span> Animated</a>
+                    </div>
+                </div>
+                <a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a>
+                <a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a>
+                <a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a>
+                <a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a>
+                <a href="blog.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a>
+                <a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a>
+                <a href="documentation.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Docs</a>
+                <a href="contact.html" class="btn-primary inline-flex mt-4">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                    Book a Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero-premium flex items-center pt-20">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative z-10 w-full">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Headline -->
+                <div class="text-reveal mb-4">
+                    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight">
+                        <span class="text-reveal-line">We Build AI Systems</span>
+                        <span class="text-reveal-line text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-primary-500 to-accent-500">That Scale Businesses</span>
+                    </h1>
+                </div>
+
+                <!-- Subheadline -->
+                <p class="hero-fade-in hero-fade-in-delay-1 text-lg sm:text-xl lg:text-2xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
+                    From intelligent chatbots to full-scale automation, we help ambitious companies eliminate manual work and unlock exponential growth.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="hero-fade-in hero-fade-in-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                    <a href="contact.html" class="btn-primary btn-glow inline-flex items-center justify-center text-lg px-10 py-4 rounded-2xl cta-glow group">
+                        <span>Get Your Free Strategy</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="#showcase" class="inline-flex items-center justify-center text-lg px-8 py-4 rounded-2xl text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium transition-all group">
+                        <span class="w-12 h-12 mr-3 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center group-hover:border-primary-500 group-hover:bg-primary-500/5 transition-all">
+                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        </span>
+                        Watch Demo
+                    </a>
+                </div>
+
+                <!-- Trust Row -->
+                <div class="hero-fade-in hero-fade-in-delay-3 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 dark:text-gray-500">
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-primary-500"></i>
+                        SOC 2 Certified
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="clock" class="w-4 h-4 text-primary-500"></i>
+                        48-Hour Onboarding
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="zap" class="w-4 h-4 text-primary-500"></i>
+                        Average 340% ROI
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MARQUEE LOGOS ========== -->
+    <section class="py-12 border-y border-gray-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+            <p class="text-center text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-medium">Trusted by industry leaders worldwide</p>
+        </div>
+        <div class="marquee-mask overflow-hidden">
+            <div class="marquee-track">
+                <!-- Logos repeated 2x for seamless loop -->
+                <div class="flex items-center gap-12 px-6">
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">TechCorp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">ScaleUp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">GrowthLab</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">DataPro</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">NovaTech</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">FinServe</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">CloudSync</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">MedAI</div>
+                </div>
+                <div class="flex items-center gap-12 px-6">
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">TechCorp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">ScaleUp</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">GrowthLab</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">DataPro</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">NovaTech</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">FinServe</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">CloudSync</div>
+                    <div class="company-logo w-28 h-10 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 flex-shrink-0">MedAI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BENTO FEATURE GRID ========== -->
+    <section id="showcase" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="h2-reveal max-w-2xl mb-16">
+                <span class="text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">Why BaGency</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                    Everything you need to <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">automate & scale</span>
+                </h2>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="stagger-children grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Large Card: AI Chatbots -->
+                <div class="bento-card lg:col-span-2 gradient-border rounded-3xl p-8 lg:p-10 bg-white dark:bg-gray-900 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="bento-icon w-14 h-14 bg-gradient-to-br from-primary-500/10 to-primary-500/5 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="message-square" class="w-7 h-7 text-primary-500"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3">AI-Powered Chatbots</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-lg">Deploy intelligent chatbots that understand context, qualify leads, and resolve support tickets 24/7 — with human-like accuracy.</p>
+                        <!-- Mini chat mockup -->
+                        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 max-w-sm">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 shadow-sm">
+                                    Hi! I'm your AI assistant. How can I help you today?
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 justify-end">
+                                <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm shadow-sm">
+                                    I need help with lead qualification
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Background decoration -->
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary-500/5 rounded-full blur-2xl"></div>
+                </div>
+
+                <!-- Small Card: Workflow -->
+                <div class="bento-card gradient-border rounded-3xl p-8 bg-white dark:bg-gray-900 relative overflow-hidden flex flex-col">
+                    <div class="bento-icon w-14 h-14 bg-gradient-to-br from-accent-500/10 to-accent-500/5 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="workflow" class="w-7 h-7 text-accent-500"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Workflow Automation</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm flex-1">Connect your tools, automate repetitive tasks, and eliminate manual bottlenecks across your entire operation.</p>
+                    <div class="mt-6 flex items-center gap-2 text-primary-500 font-medium text-sm group cursor-pointer">
+                        <span>Explore</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent-500/5 rounded-full blur-2xl"></div>
+                </div>
+
+                <!-- Small Card: CRM -->
+                <div class="bento-card gradient-border rounded-3xl p-8 bg-white dark:bg-gray-900 relative overflow-hidden flex flex-col">
+                    <div class="bento-icon w-14 h-14 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="database" class="w-7 h-7 text-cyan-500"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">CRM Automation</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm flex-1">AI-powered lead scoring, auto follow-ups, and pipeline management that converts prospects while you sleep.</p>
+                    <div class="mt-6 flex items-center gap-2 text-primary-500 font-medium text-sm group cursor-pointer">
+                        <span>Explore</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl"></div>
+                </div>
+
+                <!-- Large Card: AI Marketing -->
+                <div class="bento-card lg:col-span-2 gradient-border rounded-3xl p-8 lg:p-10 bg-white dark:bg-gray-900 relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="flex-1">
+                            <div class="bento-icon w-14 h-14 bg-gradient-to-br from-amber-500/10 to-amber-500/5 rounded-2xl flex items-center justify-center mb-6">
+                                <i data-lucide="megaphone" class="w-7 h-7 text-amber-500"></i>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold mb-3">AI Marketing Engine</h3>
+                            <p class="text-gray-500 dark:text-gray-400 mb-4">Hyper-personalized campaigns, predictive analytics, and automated content creation that drive 3x higher engagement.</p>
+                            <div class="flex items-center gap-2 text-primary-500 font-medium text-sm group cursor-pointer">
+                                <span>See case studies</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                        <!-- Mini metrics -->
+                        <div class="grid grid-cols-2 gap-3 flex-shrink-0">
+                            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
+                                <p class="text-2xl font-display font-bold text-primary-500">3x</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">More Engagement</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
+                                <p class="text-2xl font-display font-bold text-accent-500">62%</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Cost Reduction</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
+                                <p class="text-2xl font-display font-bold text-cyan-500">5x</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Faster Campaigns</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
+                                <p class="text-2xl font-display font-bold text-amber-500">24/7</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Optimization</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-amber-500/5 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATS / IMPACT SECTION ========== -->
+    <section class="py-20 lg:py-28 bg-gray-50 dark:bg-gray-800/30 dot-pattern relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="h2-reveal text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">Our Impact</span>
+                <h2 class="h2-reveal font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    Numbers that speak for themselves
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-0 glass-card rounded-3xl overflow-hidden shadow-lg shadow-primary-500/5">
+                <div class="stat-item reveal p-8 lg:p-12 text-center">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary-500 to-primary-600 mb-2">
+                        <span class="counter" data-target="500">0</span>+
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">Businesses Transformed</p>
+                </div>
+                <div class="stat-item reveal p-8 lg:p-12 text-center" style="transition-delay: 0.1s">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary-500 to-primary-600 mb-2">
+                        $<span class="counter" data-target="12">0</span>M
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">Revenue Generated</p>
+                </div>
+                <div class="stat-item reveal p-8 lg:p-12 text-center" style="transition-delay: 0.2s">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-accent-500 to-accent-600 mb-2">
+                        <span class="counter" data-target="340">0</span>%
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">Average Efficiency Gain</p>
+                </div>
+                <div class="stat-item reveal p-8 lg:p-12 text-center" style="transition-delay: 0.3s">
+                    <div class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-accent-500 to-accent-600 mb-2">
+                        <span class="counter" data-target="98">0</span>%
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">Client Retention</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES SECTION ========== -->
+    <section id="services" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+                <div class="h2-reveal">
+                    <span class="text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">Our Expertise</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                        Services built for<br class="hidden sm:block"> modern businesses
+                    </h2>
+                </div>
+                <div class="h2-reveal">
+                    <a href="services.html" class="btn-secondary inline-flex items-center text-sm px-6 py-3 rounded-xl">
+                        View All Services
+                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
+                <!-- Service Cards rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROCESS / HOW IT WORKS ========== -->
+    <section class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Left: Content -->
+                <div>
+                    <div class="reveal">
+                        <span class="text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">How It Works</span>
+                        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                            From idea to impact<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">in four simple steps</span>
+                        </h2>
+                        <p class="text-gray-500 dark:text-gray-400 text-lg mb-10">
+                            Our proven methodology takes you from discovery to deployment with minimal disruption and maximum results.
+                        </p>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="space-y-4" id="process-timeline">
+                        <!-- Steps rendered by home2.js -->
+                    </div>
+                </div>
+
+                <!-- Right: Visual -->
+                <div class="reveal-right relative hidden lg:block">
+                    <div class="relative">
+                        <!-- Main visual card -->
+                        <div class="glass-card rounded-3xl p-8 shadow-xl">
+                            <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-400 font-medium">Automation Pipeline</span>
+                                </div>
+                                <!-- Pipeline steps -->
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="git-branch" class="w-5 h-5 text-primary-400"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium">Lead Capture</span>
+                                                <span class="text-xs text-primary-400">Active</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                                <div class="progress-fill h-full bg-gradient-to-r from-primary-500 to-primary-400 rounded-full" style="--target-width: 92%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-accent-500/20 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="brain" class="w-5 h-5 text-accent-400"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium">AI Qualification</span>
+                                                <span class="text-xs text-accent-400">Active</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                                <div class="progress-fill h-full bg-gradient-to-r from-accent-500 to-accent-400 rounded-full" style="--target-width: 78%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="send" class="w-5 h-5 text-cyan-400"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium">Auto Follow-up</span>
+                                                <span class="text-xs text-cyan-400">Queued</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                                <div class="progress-fill h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="--target-width: 64%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-amber-400"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-sm font-medium">Performance Analytics</span>
+                                                <span class="text-xs text-amber-400">Running</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                                <div class="progress-fill h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style="--target-width: 85%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating badge -->
+                        <div class="float-element absolute -top-4 -right-4 glass-card rounded-2xl p-3 shadow-lg border border-primary-500/20">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Tasks Automated</p>
+                                    <p class="font-bold text-primary-500 text-sm">2,847 today</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CASE STUDIES / RESULTS SECTION ========== -->
+    <section class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+                <div class="h2-reveal">
+                    <span class="text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">Case Studies</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                        Real results,<br class="hidden sm:block"> real businesses
+                    </h2>
+                </div>
+                <div class="h2-reveal">
+                    <a href="case-studies.html" class="btn-secondary inline-flex items-center text-sm px-6 py-3 rounded-xl">
+                        View All Studies
+                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8" id="case-studies-grid">
+                <!-- Case studies rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS SECTION ========== -->
+    <section id="testimonials" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Featured Testimonial -->
+            <div class="h2-reveal mb-16">
+                <div class="testimonial-spotlight glass-card rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+                    <div class="grid lg:grid-cols-5 gap-8 items-center">
+                        <div class="lg:col-span-3">
+                            <div class="flex items-center gap-1 mb-6">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            </div>
+                            <blockquote class="text-xl lg:text-2xl font-light leading-relaxed text-gray-700 dark:text-gray-200 mb-8">
+                                "BaGency transformed our customer support completely. Our response time went from 4 hours to under 30 seconds. The AI chatbot handles 80% of queries automatically, and our CSAT scores increased by 40%. This has been the single best investment we've made."
+                            </blockquote>
+                            <div class="flex items-center gap-4">
+                                <div class="avatar-gradient w-14 h-14 flex-shrink-0">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah Johnson" class="object-cover rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="hidden bg-primary-500 text-white items-center justify-center font-semibold rounded-full">SJ</div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">Sarah Johnson</p>
+                                    <p class="text-gray-500 dark:text-gray-400">CEO, TechFlow Inc.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-primary-500/5 dark:bg-primary-500/10 border border-primary-500/10 rounded-2xl p-5 text-center">
+                                    <p class="text-3xl font-display font-bold text-primary-500">210%</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Lead Increase</p>
+                                </div>
+                                <div class="bg-accent-500/5 dark:bg-accent-500/10 border border-accent-500/10 rounded-2xl p-5 text-center">
+                                    <p class="text-3xl font-display font-bold text-accent-500">80%</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Queries Automated</p>
+                                </div>
+                                <div class="bg-cyan-500/5 dark:bg-cyan-500/10 border border-cyan-500/10 rounded-2xl p-5 text-center">
+                                    <p class="text-3xl font-display font-bold text-cyan-500">30s</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Response Time</p>
+                                </div>
+                                <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/10 rounded-2xl p-5 text-center">
+                                    <p class="text-3xl font-display font-bold text-amber-500">40%</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">CSAT Increase</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial Slider -->
+            <div class="h2-reveal text-center mb-10">
+                <h3 class="font-display text-2xl sm:text-3xl font-bold">What our clients say</h3>
+            </div>
+
+            <div class="relative overflow-hidden">
+                <div id="testimonials-slider" class="testimonial-slider">
+                    <!-- Testimonials rendered by JS -->
+                </div>
+                <div class="flex justify-center mt-8 space-x-4">
+                    <button id="testimonial-prev" class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button id="testimonial-next" class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div id="testimonial-dots" class="flex justify-center mt-6 space-x-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRICING TEASER ========== -->
+    <section id="pricing" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="h2-reveal inline-flex items-center px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+                    <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
+                    Simple, Transparent Pricing
+                </div>
+                <h2 class="h2-reveal font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                    Plans that <span class="text-primary-500">grow with you</span>
+                </h2>
+                <p class="h2-reveal text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+                    Start small, scale big. No hidden fees, no lock-in contracts.
+                </p>
+
+                <!-- Billing Toggle -->
+                <div class="h2-reveal flex items-center justify-center mt-8 space-x-4">
+                    <span class="text-gray-600 dark:text-gray-400">Monthly</span>
+                    <button id="billing-toggle" class="relative w-14 h-7 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors shadow-lg">
+                        <span id="billing-toggle-dot" class="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-all duration-300 shadow"></span>
+                    </button>
+                    <span class="text-gray-600 dark:text-gray-400">Yearly <span class="text-primary-500 font-bold">(Save 20%)</span></span>
+                </div>
+            </div>
+
+            <div class="stagger-children grid md:grid-cols-3 gap-6 lg:gap-8 items-start" id="pricing-grid">
+                <!-- Pricing rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section id="faq" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="h2-reveal">
+                    <span class="text-primary-500 font-medium text-sm uppercase tracking-widest mb-3 block">FAQ</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                        Questions? Answered.
+                    </h2>
+                </div>
+            </div>
+            <div id="faq-container" class="space-y-4">
+                <!-- FAQ rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FINAL CTA SECTION ========== -->
+    <section class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h2-reveal cta-shimmer relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 p-10 sm:p-16 lg:p-20 text-center text-white shadow-2xl border border-gray-700/50">
+                <!-- Background elements -->
+                <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-2xl"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-8">
+                        <i data-lucide="rocket" class="w-4 h-4 text-primary-400"></i>
+                        <span class="text-sm text-gray-300">14-day free trial. No credit card required.</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
+                        Ready to transform<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">your business?</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                        Join 500+ companies already using BaGency to automate, optimize, and scale. Book your free strategy call today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="contact.html" class="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-semibold text-lg hover:shadow-lg hover:shadow-primary-500/30 transition-all hover:scale-105 group">
+                            <span>Book Your Free Strategy Call</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                        <a href="mailto:hello@bacodev.com" class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white rounded-2xl font-semibold hover:bg-white/5 transition-all hover:scale-105">
+                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                            hello@bacodev.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <a href="home2.html" class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                            <span class="text-white font-display font-bold text-xl">B</span>
+                        </div>
+                        <span class="font-display font-bold text-2xl">BaGency</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">
+                        Transform your business with cutting-edge AI automation solutions. Save time, reduce costs, and scale efficiently.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home2.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li>
+                        <li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-primary-400"></i>
+                            <a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-primary-400"></i>
+                            <a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i>
+                            <span class="text-gray-400">123 AI Street, Tech City, TC 12345</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+    
+    <!-- ========== JAVASCRIPT ========== -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Home2 Specific Scripts -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // === Custom Process Renderer for Home2 ===
+        (function() {
+            const timeline = document.getElementById('process-timeline');
+            if (!timeline || typeof processData === 'undefined') return;
+
+            timeline.innerHTML = processData.map((item, index) => `
+                <div class="reveal flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors cursor-default group" style="transition-delay: ${index * 0.1}s">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white font-display font-bold text-sm shadow-lg shadow-primary-500/20 group-hover:scale-110 transition-transform">
+                        ${item.step}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-display font-bold text-base mb-1">${item.title}</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">${item.description}</p>
+                    </div>
+                    <i data-lucide="${item.icon}" class="w-5 h-5 text-gray-300 dark:text-gray-600 flex-shrink-0 mt-1 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            `).join('');
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            // Re-init scroll reveal for the newly rendered process items
+            if (typeof initScrollReveal === 'function') {
+                initScrollReveal();
+            }
+        })();
+
+        // Animate progress bars when visible
+        const progressBars = document.querySelectorAll('.progress-fill');
+        if (progressBars.length) {
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        progressObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            progressBars.forEach(bar => progressObserver.observe(bar));
+        }
+
+        // Initialize home2 scroll reveals
+        const h2Reveals = document.querySelectorAll('.h2-reveal, .stagger-children');
+        if (h2Reveals.length) {
+            const h2Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        h2Observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            h2Reveals.forEach(el => h2Observer.observe(el));
+        }
+
+        // Re-init Lucide for home2 specific icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
+    </script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

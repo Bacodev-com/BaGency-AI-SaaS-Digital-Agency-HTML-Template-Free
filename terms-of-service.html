@@ -1,0 +1,197 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaGency - Terms of Service</title>
+    <!--
+        Page: Terms of Service
+        Purpose: Legal page governing use of BaGency services and website
+        Sections: Navbar, Page Header, Terms of Service Content (acceptance, services, user obligations, payment, intellectual property, limitation of liability, termination, governing law), Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: initScrollReveal() (shared navbar/footer behavior)
+    -->
+    <meta name="description" content="Read the terms and conditions governing your use of BaGency's AI automation services and website.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div>
+                <span class="font-display font-bold text-2xl">BaGency</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Home</a>
+                <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                <a href="blog.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"><i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i><i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i></button>
+                <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a>
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- ========== MOBILE MENU ========== -->
+<div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden"><div class="p-6"><button id="mobile-menu-close" class="absolute top-6 right-6"><i data-lucide="x" class="w-6 h-6"></i></button><div class="mt-12 space-y-6"><a href="index.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Home</a><a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a><a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a><a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a><a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a><a href="blog.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a><a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a><a href="contact.html" class="btn-primary inline-flex mt-4"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a></div></div></div>
+
+<!-- ========== PAGE HEADER ========== -->
+<section class="pt-32 pb-16 page-header-bg relative">
+    <div class="mesh-gradient"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="reveal breadcrumb justify-center mb-6">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Terms of Service</span>
+            </div>
+            <h1 class="reveal font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+                Terms of <span class="text-primary-500">Service</span>
+            </h1>
+            <p class="reveal text-gray-600 dark:text-gray-400 text-lg max-w-xl mx-auto">
+                Please review the terms and conditions that govern your use of BaGency's services and website.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TERMS OF SERVICE CONTENT ========== -->
+<section class="py-20 lg:py-32">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal glass-card rounded-3xl p-8 lg:p-12">
+            <div class="blog-content">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-8"><i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> Last updated: January 15, 2026</p>
+
+                <p>Welcome to BaGency. These Terms of Service ("Terms") govern your access to and use of our website, products, services, and applications (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our Services.</p>
+
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing, browsing, or using our website and Services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service, as well as our <a href="privacy-policy.html">Privacy Policy</a> and <a href="cookie-policy.html">Cookie Policy</a>. These documents collectively govern your relationship with BaGency.</p>
+                <p>If you are using our Services on behalf of a business or organization, you represent and warrant that you have the authority to bind that entity to these Terms.</p>
+
+                <h2>2. Services Description</h2>
+                <p>BaGency provides AI-powered automation solutions and consulting services, including but not limited to:</p>
+                <ul>
+                    <li>AI Chatbot development and integration</li>
+                    <li>Workflow automation and optimization</li>
+                    <li>CRM automation and data management</li>
+                    <li>AI-powered marketing solutions</li>
+                    <li>Lead generation and qualification systems</li>
+                    <li>Custom AI solution development and consulting</li>
+                </ul>
+                <p>We reserve the right to modify, suspend, or discontinue any part of our Services at any time, with or without notice. We shall not be liable for any modification, suspension, or discontinuance of the Services.</p>
+
+                <h2>3. User Responsibilities</h2>
+                <p>By using our Services, you agree to:</p>
+                <ul>
+                    <li>Provide accurate and complete information when requested</li>
+                    <li>Keep your account credentials confidential and secure</li>
+                    <li>Not use our Services for any unlawful purpose or in violation of any applicable laws</li>
+                    <li>Not attempt to gain unauthorized access to our systems, networks, or data</li>
+                    <li>Not interfere with or disrupt the integrity or performance of our Services</li>
+                    <li>Not reproduce, duplicate, or resell any part of our Services without express written permission</li>
+                    <li>Not use automated tools, bots, or scrapers to access our Services without authorization</li>
+                    <li>Comply with all applicable export and import laws and regulations</li>
+                </ul>
+
+                <h2>4. Payment Terms</h2>
+                <p>Certain Services may require payment. By subscribing to or purchasing paid Services, you agree to the following:</p>
+                <ul>
+                    <li>All fees are listed in US dollars unless otherwise specified</li>
+                    <li>Payment is due at the time of purchase or as outlined in your service agreement</li>
+                    <li>We reserve the right to change our pricing with 30 days' written notice</li>
+                    <li>Refunds are subject to our refund policy and are evaluated on a case-by-case basis</li>
+                    <li>Failure to pay may result in suspension or termination of Services</li>
+                </ul>
+                <p>Taxes are not included in our pricing and are the responsibility of the purchaser where applicable.</p>
+
+                <h2>5. Intellectual Property</h2>
+                <p>All content, features, and functionality of our Services — including but not limited to text, graphics, logos, icons, images, audio clips, software, and their compilation — are the exclusive property of BaGency or its licensors and are protected by copyright, trademark, and other intellectual property laws.</p>
+                <p>You may not:</p>
+                <ul>
+                    <li>Copy, modify, distribute, sell, or lease any part of our Services</li>
+                    <li>Reverse engineer, decompile, or disassemble any software used in our Services</li>
+                    <li>Use our trademarks, service marks, or logos without prior written consent</li>
+                </ul>
+                <p>You retain ownership of any content you provide to us. By submitting content, you grant BaGency a non-exclusive, worldwide, royalty-free license to use, reproduce, and process that content for the purpose of delivering our Services.</p>
+
+                <h2>6. Limitation of Liability</h2>
+                <p>To the fullest extent permitted by applicable law, BaGency and its officers, directors, employees, agents, and affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                <ul>
+                    <li>Your access to or use of (or inability to access or use) our Services</li>
+                    <li>Any conduct or content of any third party on our Services</li>
+                    <li>Any content obtained from our Services</li>
+                    <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                </ul>
+                <p>In no event shall our total liability exceed the amount paid by you to BaGency in the twelve (12) months preceding the claim.</p>
+
+                <h2>7. Termination</h2>
+                <p>We may terminate or suspend your access to our Services immediately, without prior notice or liability, for any reason, including without limitation if you breach these Terms.</p>
+                <p>Upon termination, your right to use our Services will immediately cease. All provisions of these Terms that by their nature should survive termination shall survive, including but not limited to ownership provisions, warranty disclaimers, indemnification clauses, and limitations of liability.</p>
+
+                <h2>8. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law provisions. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts located in Delaware.</p>
+
+                <h2>9. Changes to Terms</h2>
+                <p>We reserve the right to modify or replace these Terms at any time at our sole discretion. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                <p>Your continued use of our Services after the effective date of any changes constitutes your acceptance of the revised Terms. It is your responsibility to review these Terms periodically.</p>
+
+                <h2>10. Contact Us</h2>
+                <p>If you have any questions about these Terms of Service, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> legal@bacodev.com</li>
+                    <li><strong>Phone:</strong> +1 (234) 567-890</li>
+                    <li><strong>Address:</strong> 123 AI Street, Tech City, TC 12345</li>
+                </ul>
+                <p>For questions about privacy and data protection, please refer to our <a href="privacy-policy.html">Privacy Policy</a> or contact us at privacy@bacodev.com.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <a href="index.html" class="flex items-center space-x-2 mb-6"><div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div><span class="font-display font-bold text-2xl">BaGency</span></a>
+                <p class="text-gray-400 mb-6">Transform your business with cutting-edge AI automation solutions.</p>
+                <div class="flex space-x-4"><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
+            </div>
+            <div><h4 class="font-semibold text-lg mb-6">Quick Links</h4><ul class="space-y-3"><li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li><li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li><li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li><li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li><li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li><li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Services</h4><ul class="space-y-3"><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Contact</h4><ul class="space-y-3"><li class="flex items-center space-x-3"><i data-lucide="mail" class="w-5 h-5 text-primary-400"></i><a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a></li><li class="flex items-center space-x-3"><i data-lucide="phone" class="w-5 h-5 text-primary-400"></i><a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a></li><li class="flex items-start space-x-3"><i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i><span class="text-gray-400">123 AI Street, Tech City, TC 12345</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+            <div class="flex space-x-6 mt-4 md:mt-0"><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a><a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<!-- ========== JAVASCRIPT ========== -->
+<button id="back-to-top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!--
+BaGency Template by BaCodev
+Free for personal use only
+Commercial license required for client or paid use
+https://bacodev.com
+Contact: support@bacodev.com
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaGency - Blog Post</title>
+    <!--
+        Page: Blog Single Post
+        Purpose: Individual blog article with rich typography, author bio, and related posts
+        Sections: Navbar, Page Header (breadcrumb), Featured Image, Blog Content, Author Bio, Related Posts, CTA, Footer
+        Dependencies: js/main.js, js/data.js, js/tailwind-config.js, css/style.css, Tailwind CDN, Lucide Icons, Google Fonts
+        Dynamic Elements: renderRelatedPosts(), initScrollReveal()
+    -->
+    <meta name="description" content="How AI Chatbots Are Revolutionizing Customer Support in 2026 - Learn how businesses are using AI-powered chatbots to deliver exceptional customer experiences.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div>
+                <span class="font-display font-bold text-2xl">BaGency</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Home</a>
+                <a href="about.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">About</a>
+                <a href="services.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Services</a>
+                <a href="case-studies.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Case Studies</a>
+                <a href="pricing.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Pricing</a>
+                <a href="blog.html" class="nav-link active text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Blog</a>
+                <a href="contact.html" class="nav-link text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors font-medium">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"><i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i><i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i></button>
+                <a href="contact.html" class="hidden sm:inline-flex btn-primary btn-glow text-sm"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a>
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-gray-100 dark:bg-gray-800"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- ========== MOBILE MENU ========== -->
+<div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 z-50 shadow-2xl lg:hidden"><div class="p-6"><button id="mobile-menu-close" class="absolute top-6 right-6"><i data-lucide="x" class="w-6 h-6"></i></button><div class="mt-12 space-y-6"><a href="index.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Home</a><a href="about.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">About</a><a href="services.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Services</a><a href="case-studies.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Case Studies</a><a href="pricing.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Pricing</a><a href="blog.html" class="mobile-nav-link active block text-lg font-medium hover:text-primary-500 transition-colors">Blog</a><a href="contact.html" class="mobile-nav-link block text-lg font-medium hover:text-primary-500 transition-colors">Contact</a><a href="contact.html" class="btn-primary inline-flex mt-4"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Book a Call</a></div></div></div>
+
+<!-- ========== PAGE HEADER ========== -->
+<section class="pt-32 pb-16 page-header-bg relative">
+    <div class="mesh-gradient"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="reveal breadcrumb justify-center mb-6">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="blog.html">Blog</a>
+                <span class="separator">/</span>
+                <span class="current">How AI Chatbots Are Revolutionizing Customer Support in 2026</span>
+            </div>
+            <h1 class="reveal font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                How AI Chatbots Are Revolutionizing Customer Support in <span class="text-primary-500">2026</span>
+            </h1>
+            <div class="reveal flex items-center justify-center space-x-4">
+                <div class="avatar-gradient w-12 h-12 flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&h=50&fit=crop&crop=face" alt="Alex Morgan" class="object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hidden bg-primary-500 text-white items-center justify-center font-semibold text-xs">AM</div>
+                </div>
+                <div class="text-left">
+                    <p class="font-semibold">Alex Morgan</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Dec 15, 2026 &middot; 8 min read</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURED IMAGE ========== -->
+<section class="pb-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal glass-card rounded-2xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=500&fit=crop" alt="AI Chatbot Technology" class="w-full h-64 sm:h-80 lg:h-96 object-cover">
+        </div>
+    </div>
+</section>
+
+<!-- ========== BLOG CONTENT SECTION ========== -->
+<section class="py-8 lg:py-12">
+    <div class="blog-content max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="reveal text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+            The landscape of customer support has undergone a dramatic transformation in recent years. As businesses strive to meet ever-growing customer expectations, AI-powered chatbots have emerged as a game-changing technology that is reshaping how companies interact with their customers. In this comprehensive guide, we explore the profound impact AI chatbots are having on customer support in 2026.
+        </p>
+
+        <p class="reveal text-gray-600 dark:text-gray-400 leading-relaxed">
+            According to recent industry data, over 67% of consumers now prefer self-service over speaking to a human agent. This shift in consumer behavior has accelerated the adoption of AI chatbots across every industry, from e-commerce and healthcare to finance and technology. But what exactly makes these chatbots so revolutionary?
+        </p>
+
+        <h2>Why AI Chatbots Matter</h2>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Traditional customer support models are expensive, slow, and often inconsistent. Customers hate waiting on hold for 20 minutes only to be transferred between departments. AI chatbots solve these fundamental problems by providing instant, accurate, and personalized responses around the clock.
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            The technology behind modern chatbots has advanced far beyond simple rule-based systems. Today's AI chatbots leverage large language models, natural language processing, and machine learning to understand context, nuance, and intent — enabling conversations that feel genuinely human.
+        </p>
+
+        <ul>
+            <li>24/7 availability — customers get instant responses any time of day, regardless of time zones or business hours</li>
+            <li>Consistent quality — every interaction delivers the same high standard of service, eliminating variability between human agents</li>
+            <li>Scalability — a single chatbot can handle thousands of conversations simultaneously without breaking a sweat</li>
+            <li>Cost efficiency — businesses save an average of 30-50% on customer support costs within the first year of deployment</li>
+            <li>Multilingual support — modern AI chatbots can communicate in over 50 languages natively, breaking down global barriers</li>
+        </ul>
+
+        <h2>Key Benefits</h2>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            The benefits of implementing AI chatbots extend far beyond cost savings. When properly deployed, they become a strategic asset that drives customer satisfaction, loyalty, and revenue growth. Here are the key advantages businesses are experiencing:
+        </p>
+
+        <ul>
+            <li>90% faster response times compared to traditional support channels, dramatically reducing customer wait times</li>
+            <li>80% first-contact resolution rate for common queries, from order tracking to account management</li>
+            <li>40% increase in customer satisfaction scores (CSAT) within just 6 months of implementation</li>
+            <li>Seamless escalation — AI chatbots intelligently identify complex issues and route them to the right human agents with full context</li>
+            <li>Continuous learning — every interaction makes the chatbot smarter, delivering increasingly personalized experiences over time</li>
+        </ul>
+
+        <blockquote>
+            "The best AI chatbots don't replace human agents — they augment them. By handling the repetitive queries, they free up human talent to focus on the complex, high-value interactions that truly require empathy and creative problem-solving."
+        </blockquote>
+
+        <h3>The Technology Behind the Revolution</h3>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Modern AI chatbots are built on a foundation of advanced technologies that work together seamlessly. Natural Language Processing (NLP) enables the bot to understand the meaning behind customer messages, while sentiment analysis helps gauge emotional tone and urgency. Intent classification ensures that queries are categorized correctly and routed to the appropriate resolution path.
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Integration with existing business systems is another critical factor. The most effective chatbots connect directly to CRMs, knowledge bases, inventory systems, and order management platforms — giving them real-time access to the information they need to resolve customer issues on the spot.
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Looking ahead, the future of AI chatbots is incredibly promising. With advances in multimodal AI, voice integration, and predictive analytics, the next generation of chatbots will be even more capable, proactive, and personalized. Businesses that embrace this technology today will be well-positioned to lead their industries tomorrow.
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            If you're ready to revolutionize your customer support with AI, <a href="contact.html">get in touch with our team</a> for a free consultation. We'll help you design and implement a chatbot solution that's tailored to your unique business needs and customer expectations.
+        </p>
+    </div>
+</section>
+
+<!-- ========== AUTHOR BIO SECTION ========== -->
+<section class="py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal glass-card rounded-2xl p-6 lg:p-8">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <div class="avatar-gradient w-20 h-20 flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face" alt="Alex Morgan" class="object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hidden bg-primary-500 text-white items-center justify-center font-bold text-xl">AM</div>
+                </div>
+                <div>
+                    <h3 class="font-display text-lg font-bold mb-1">Alex Morgan</h3>
+                    <p class="text-primary-500 text-sm font-medium mb-3">CEO & Founder</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        Former Google AI engineer with 15+ years in machine learning. Alex founded BaGency to democratize AI for businesses of all sizes. He's passionate about helping companies harness the power of automation to drive growth and deliver exceptional customer experiences.
+                    </p>
+                    <div class="flex space-x-3 mt-4">
+                        <a href="#" class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors text-gray-500">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors text-gray-500">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== RELATED POSTS SECTION ========== -->
+<section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="reveal font-display text-3xl sm:text-4xl font-bold mb-4">
+                Related <span class="text-primary-500">Articles</span>
+            </h2>
+            <p class="reveal text-gray-600 dark:text-gray-400">Continue reading with these related posts from our blog.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Related Post 1 -->
+            <div class="reveal">
+                <a href="blog-single.html?id=2" class="blog-card glass-card rounded-2xl overflow-hidden block group h-full">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop" alt="Workflow Automation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full">Automation</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">12 min read</span>
+                        </div>
+                        <h3 class="font-display text-lg font-bold mb-2 group-hover:text-primary-500 transition-colors">The Complete Guide to Workflow Automation for Small Businesses</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Step-by-step guide to automating your business workflows. Learn which processes to automate first and how to measure ROI.</p>
+                        <div class="flex items-center space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <div class="avatar-gradient w-8 h-8 flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=50&h=50&fit=crop&crop=face" alt="Priya Sharma" class="object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="hidden bg-primary-500 text-white items-center justify-center font-semibold text-xs">PS</div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Priya Sharma</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Dec 10, 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Related Post 2 -->
+            <div class="reveal" style="transition-delay: 0.1s">
+                <a href="blog-single.html?id=3" class="blog-card glass-card rounded-2xl overflow-hidden block group h-full">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="ROI Analytics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full">ROI & Analytics</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">10 min read</span>
+                        </div>
+                        <h3 class="font-display text-lg font-bold mb-2 group-hover:text-primary-500 transition-colors">ROI of AI: What to Expect in Your First Year</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Real data from 500+ clients showing typical ROI timelines, cost savings, and revenue impact of AI automation.</p>
+                        <div class="flex items-center space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <div class="avatar-gradient w-8 h-8 flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=50&h=50&fit=crop&crop=face" alt="Marcus Johnson" class="object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="hidden bg-primary-500 text-white items-center justify-center font-semibold text-xs">MJ</div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Marcus Johnson</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Dec 5, 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Related Post 3 -->
+            <div class="reveal" style="transition-delay: 0.2s">
+                <a href="blog-single.html?id=4" class="blog-card glass-card rounded-2xl overflow-hidden block group h-full">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=400&fit=crop" alt="CRM Automation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="px-3 py-1 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full">CRM</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">7 min read</span>
+                        </div>
+                        <h3 class="font-display text-lg font-bold mb-2 group-hover:text-primary-500 transition-colors">5 CRM Automation Strategies That Boost Sales by 150%</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">Proven CRM automation techniques that help sales teams close more deals with less effort. Includes real case studies.</p>
+                        <div class="flex items-center space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <div class="avatar-gradient w-8 h-8 flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=50&h=50&fit=crop&crop=face" alt="Sophie Chen" class="object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="hidden bg-primary-500 text-white items-center justify-center font-semibold text-xs">SC</div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Sophie Chen</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Nov 28, 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section class="py-20 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 via-primary-600 to-accent-600 p-8 lg:p-16 text-center text-white shadow-2xl">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute top-1/2 left-1/2 w-80 h-80 bg-white rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+            <div class="relative z-10">
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                    Ready to Transform Your Business?
+                </h2>
+                <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+                    Discover how AI automation can save you time, reduce costs, and accelerate growth. Let's build the future together.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
+                        <i data-lucide="rocket" class="w-5 h-5 mr-2"></i>
+                        Get Started Free
+                    </a>
+                    <a href="pricing.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all hover:scale-105">
+                        <i data-lucide="credit-card" class="w-5 h-5 mr-2"></i>
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <a href="index.html" class="flex items-center space-x-2 mb-6"><div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20"><span class="text-white font-display font-bold text-xl">B</span></div><span class="font-display font-bold text-2xl">BaGency</span></a>
+                <p class="text-gray-400 mb-6">Transform your business with cutting-edge AI automation solutions.</p>
+                <div class="flex space-x-4"><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
+            </div>
+            <div><h4 class="font-semibold text-lg mb-6">Quick Links</h4><ul class="space-y-3"><li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition-colors">Home</a></li><li><a href="about.html" class="text-gray-400 hover:text-primary-400 transition-colors">About</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Services</a></li><li><a href="case-studies.html" class="text-gray-400 hover:text-primary-400 transition-colors">Case Studies</a></li><li><a href="pricing.html" class="text-gray-400 hover:text-primary-400 transition-colors">Pricing</a></li><li><a href="faq.html" class="text-gray-400 hover:text-primary-400 transition-colors">FAQ</a></li><li><a href="contact.html" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Services</h4><ul class="space-y-3"><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Chatbots</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Workflow Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">CRM Automation</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">AI Marketing</a></li><li><a href="services.html" class="text-gray-400 hover:text-primary-400 transition-colors">Lead Generation</a></li></ul></div>
+            <div><h4 class="font-semibold text-lg mb-6">Contact</h4><ul class="space-y-3"><li class="flex items-center space-x-3"><i data-lucide="mail" class="w-5 h-5 text-primary-400"></i><a href="mailto:hello@bacodev.com" class="text-gray-400 hover:text-primary-400 transition-colors">hello@bacodev.com</a></li><li class="flex items-center space-x-3"><i data-lucide="phone" class="w-5 h-5 text-primary-400"></i><a href="tel:+1234567890" class="text-gray-400 hover:text-primary-400 transition-colors">+1 (234) 567-890</a></li><li class="flex items-start space-x-3"><i data-lucide="map-pin" class="w-5 h-5 text-primary-400 mt-0.5"></i><span class="text-gray-400">123 AI Street, Tech City, TC 12345</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 BaGency. All rights reserved.<br><span class="text-xs text-gray-500"><a href="https://bacodev.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-400 transition-colors">Template by BaCodev (bacodev.com)</a></span></p>
+            <div class="flex space-x-6 mt-4 md:mt-0"><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Privacy Policy</a><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Terms of Service</a><a href="cookie-policy.html" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">Cookie Policy</a></div>
+        </div>
+    </div>
+</footer>
+<!-- ========== JAVASCRIPT ========== -->
+<button id="back-to-top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+    <!-- Template by BaCodev | https://bacodev.com -->
+</body>
+</html>
