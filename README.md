@@ -801,6 +801,12 @@ Preview BaGency before using:
 
 ---
 
+## Live Documentation/Customisation Guide
+<p>
+  <a href="https://demo.bacodev.com/bagency/docs.html">Full Documentation</a>
+</p>
+
+---
 ## ⭐ Like this template?
 
 If BaGency helped you:
