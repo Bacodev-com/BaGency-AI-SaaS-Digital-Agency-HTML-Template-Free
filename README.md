@@ -796,7 +796,7 @@ You need a commercial license.
 Preview BaGency before using:
 
 <p>
-  [👉 View Live Demo](https://demo.bacodev.com/bagency/preview)
+  [View Live Demo](https://demo.bacodev.com/bagency/preview)
 </p>
 
 ---
